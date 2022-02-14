@@ -1,15 +1,11 @@
 package com.java.memory;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class SpielFeld extends JFrame {
 
@@ -24,8 +20,8 @@ public class SpielFeld extends JFrame {
     public void fuegeAllesZurOberflaecheHinzu(final Container pane) {
         panel.setLayout(gitterLayout);
 
-        for (int cy = 0; cy < 7; cy++) {
-            for (int cx = 0; cx < 7; cx++) {
+        for (int cy = 0; cy < 10; cy++) {
+            for (int cx = 0; cx < 10; cx++) {
 
                 //erzeuge Button
                 knoepfe[cx][cy] = new Knopf(cx, cy);

@@ -26,7 +26,8 @@ class SpielDaten {
         //Zeichen jeweils zufällig verteilt, 
         //so dass jedes Zeichen doppelt vorkommt.
         
-        //int zahl = (int) ((Math.random()) * 9);
+        int zahl = (int) ((Math.random()) * 9);
+        
         
     }
 

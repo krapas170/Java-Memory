@@ -1,13 +1,11 @@
 package com.java.memory;
 
-import java.awt.Color;
-
 public class SpielSteuerung {
 
     private SpielDaten dieSpielDaten;
     private SpielFeld dasSpielFeld;
-    private int spielfeldx = 7;
-    private int spielfeldy = 7;
+    private int spielfeldx = 10;
+    private int spielfeldy = 10;
     private int anzahlLinksKlicks = 0;
     private char wertErsterKlick;
     private int erstesX, erstesY;
@@ -30,7 +28,7 @@ public class SpielSteuerung {
 
     public void linksKlick(int x, int y) {
         anzahlLinksKlicks++;
-        char wert = dieSpielDaten.gibFeldWert(px, py);
+        char wert = dieSpielDaten.gibFeldWert(x, y);
 
         if(anzahlLinksKlicks == 1) {
             wertErsterKlick = wert;
