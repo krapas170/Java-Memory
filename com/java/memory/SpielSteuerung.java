@@ -6,8 +6,8 @@ public class SpielSteuerung {
 
     private SpielDaten dieSpielDaten;
     private SpielFeld dasSpielFeld;
-    private int spielfeldx = 10;
-    private int spielfeldy = 10;
+    private int spielfeldx = 7;
+    private int spielfeldy = 7;
     private int anzahlLinksKlicks = 0;
 
     SpielSteuerung(SpielFeld pFeld) {
@@ -28,6 +28,10 @@ public class SpielSteuerung {
 
     public void linksKlick(int x, int y) {
         anzahlLinksKlicks++;
+
+        if(anzahlLinksKlicks >= 2) {
+            anzahlLinksKlicks = 0;
+        }
     }
 
     public void rechtsKlick(int x, int y) {
