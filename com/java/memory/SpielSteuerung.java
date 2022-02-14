@@ -6,8 +6,8 @@ public class SpielSteuerung {
 
     private SpielDaten dieSpielDaten;
     private SpielFeld dasSpielFeld;
-    private int spielfeldx = 6;
-    private int spielfeldy = 6;
+    private int spielfeldx = 10;
+    private int spielfeldy = 10;
 
     SpielSteuerung(SpielFeld pFeld) {
         dasSpielFeld = pFeld;
