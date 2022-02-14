@@ -9,6 +9,8 @@ public class SpielSteuerung {
     private int spielfeldx = 7;
     private int spielfeldy = 7;
     private int anzahlLinksKlicks = 0;
+    private char wertErsterKlick;
+    private int erstesX, erstesY;
 
     SpielSteuerung(SpielFeld pFeld) {
         dasSpielFeld = pFeld;
@@ -28,6 +30,11 @@ public class SpielSteuerung {
 
     public void linksKlick(int x, int y) {
         anzahlLinksKlicks++;
+        char wert = dieSpielDaten.gibFeldWert(px, py);
+
+        if(anzahlLinksKlicks == 1) {
+            wertErsterKlick = wert;
+        }
 
         if(anzahlLinksKlicks >= 2) {
             anzahlLinksKlicks = 0;
