@@ -24,8 +24,8 @@ public class SpielFeld extends JFrame {
     public void fuegeAllesZurOberflaecheHinzu(final Container pane) {
         panel.setLayout(gitterLayout);
 
-        for (int cy = 0; cy < 10; cy++) {
-            for (int cx = 0; cx < 10; cx++) {
+        for (int cy = 0; cy < 7; cy++) {
+            for (int cx = 0; cx < 7; cx++) {
 
                 //erzeuge Button
                 knoepfe[cx][cy] = new Knopf(cx, cy);
@@ -52,3 +52,4 @@ public class SpielFeld extends JFrame {
         pane.add(panel);
         dieSpielSteuerung = new SpielSteuerung(this);
     }
+}
