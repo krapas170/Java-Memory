@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 
 public class SpielFeld extends JFrame {
 
-    public Knopf knoepfe[][] = new Knopf[10][10];
-    GridLayout gitterLayout = new GridLayout(0, 10);
+    public Knopf knoepfe[][] = new Knopf[6][6];
+    GridLayout gitterLayout = new GridLayout(0, 6);
     JPanel panel = new JPanel();
     //JTextField anzeige = new JTextField();
     //JButton neustart = new JButton("Neustart");
@@ -20,8 +20,8 @@ public class SpielFeld extends JFrame {
     public void fuegeAllesZurOberflaecheHinzu(final Container pane) {
         panel.setLayout(gitterLayout);
 
-        for (int cy = 0; cy < 10; cy++) {
-            for (int cx = 0; cx < 10; cx++) {
+        for (int cy = 0; cy < 6; cy++) {
+            for (int cx = 0; cx < 6; cx++) {
 
                 //erzeuge Button
                 knoepfe[cx][cy] = new Knopf(cx, cy);
@@ -34,7 +34,7 @@ public class SpielFeld extends JFrame {
                     int px = ((Knopf) e.getSource()).gibX();
                     int py = ((Knopf) e.getSource()).gibY();
                     System.out.println(px+"/"+py + " wurde gedrueckt");
-                    
+                    dieSpielSteuerung.linksKlick(px, py);
                 });
             }
         }

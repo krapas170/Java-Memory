@@ -3,6 +3,7 @@ package com.java.memory;
 class SpielDaten {
 
     private char memoryfeld[][];
+    private int zzahl;
 
     public SpielDaten(int xgroesse, int ygroesse) {
         //Das ist der Konstruktor, hier werden Initialisierungen vorgenommen
@@ -12,7 +13,18 @@ class SpielDaten {
         memoryfeld = new char[xgroesse][ygroesse];
         for (int idx = 0; idx < xgroesse; idx++) {
             for (int idy = 0; idy < ygroesse; idy++) {
-                memoryfeld[idx][idy] = '#';
+                
+                int zzahl = (int) ((Math.random()) * 26 + 65);
+                char letter = (char) zzahl;
+                while (anzahlBuchstabe < 2) {
+                    for (int index = 0; index < array.length; index++) {
+                        zzahl = (int) ((Math.random()) * 26 + 65);
+                    }
+                }
+                
+                
+                
+                memoryfeld[idx][idy] = letter;
             }
         }
         initialisiereMemoryFeld(xgroesse, ygroesse);
@@ -26,13 +38,15 @@ class SpielDaten {
         //Zeichen jeweils zufällig verteilt, 
         //so dass jedes Zeichen doppelt vorkommt.
         
-        int zahl = (int) ((Math.random()) * 9);
-        
+        //int zzahl = (int) ((Math.random()) * 26 + 64);
+
+        //char letter = (char) zzahl;
         
     }
 
     public char gibFeldWert(int px, int py) {
         //gibt den Wert des memoryfeld-arrays an der Stelle px/py zurück
+
         return memoryfeld[px][py];
     }
 

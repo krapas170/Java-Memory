@@ -2,13 +2,12 @@ package com.java.memory;
 
 public class SpielSteuerung {
 
+    private char letter;
     private SpielDaten dieSpielDaten;
     private SpielFeld dasSpielFeld;
-    private int spielfeldx = 10;
-    private int spielfeldy = 10;
+    private int spielfeldx = 6;
+    private int spielfeldy = 6;
     private int anzahlLinksKlicks = 0;
-    private char wertErsterKlick;
-    private int erstesX, erstesY;
 
     SpielSteuerung(SpielFeld pFeld) {
         dasSpielFeld = pFeld;
@@ -26,13 +25,14 @@ public class SpielSteuerung {
 
     }
 
-    public void linksKlick(int x, int y) {
-        anzahlLinksKlicks++;
-        char wert = dieSpielDaten.gibFeldWert(x, y);
-
+    public void linksKlick(int px, int py) {
+        
         if(anzahlLinksKlicks == 1) {
-            wertErsterKlick = wert;
+            
+            System.out.println(letter);
         }
+
+        anzahlLinksKlicks++;
 
         if(anzahlLinksKlicks >= 2) {
             anzahlLinksKlicks = 0;
