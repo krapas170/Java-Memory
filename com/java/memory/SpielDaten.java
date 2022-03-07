@@ -1,5 +1,7 @@
 package com.java.memory;
 
+import java.util.ArrayList;
+
 class SpielDaten {
 
     private char memoryfeld[][];
@@ -11,16 +13,20 @@ class SpielDaten {
         //danach nicht mehr, es sei denn, es werden mehr Objekte vom 
         //selben Typ benötigt, was bei uns nicht der Fall ist.
         memoryfeld = new char[xgroesse][ygroesse];
+        ArrayList<Integer> BuchstabenListe = new ArrayList<>();
+
         for (int idx = 0; idx < xgroesse; idx++) {
             for (int idy = 0; idy < ygroesse; idy++) {
                 
                 int zzahl = (int) ((Math.random()) * 26 + 65);
                 char letter = (char) zzahl;
-                while (anzahlBuchstabe < 2) {
+                BuchstabenListe.add(zzahl);
+                
+                /*while (anzahlBuchstabe < 2) {
                     for (int index = 0; index < array.length; index++) {
                         zzahl = (int) ((Math.random()) * 26 + 65);
                     }
-                }
+                }*/
                 
                 
                 
