@@ -3,6 +3,7 @@ package com.java.memory;
 import com.java.memory.Farben;
 
 import java.awt.Color;
+import java.beans.ExceptionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -19,45 +20,53 @@ public class SpielSteuerung {
     SpielSteuerung(SpielFeld pFeld) {
         dasSpielFeld = pFeld;
         dieSpielDaten = new SpielDaten(spielfeldx, spielfeldy);
-        
 
-        //Die SpielDaten sind erzeugt, Zeit sie auch auf dem Spielfeld f
-        //für uns einmal sichtbar zu machen 
-        //um etwaige Fehler erkennen zu können.
         for (int idx = 0; idx < spielfeldx; idx++) {
             for (int idy = 0; idy < spielfeldy; idy++) {
-                dasSpielFeld.knoepfe[idx][idy].setText("     ");
+                dasSpielFeld.knoepfe[idx][idy].setText("          ");
             }
         }
 
     }
 
     public void linksKlick(int px, int py) {
-        
+
         ArrayList<Integer> vergleich = new ArrayList<>();
+        ArrayList<Integer> arrayeins = new ArrayList<>();
+        ArrayList<Integer> arrayzwei = new ArrayList<>();
 
         anzahlLinksKlicks++;
 
-        int wertalszahl;
+        int wertalszahl = 0;
 
-        if(anzahlLinksKlicks == 1) {
+        if (anzahlLinksKlicks == 1) {
             char wert = dieSpielDaten.gibFeldWert(px, py);
             dasSpielFeld.knoepfe[px][py].setText("" + wert);
             dasSpielFeld.knoepfe[px][py].setEnabled(false);
             wertalszahl = wert;
             vergleich.add(0, wertalszahl);
-            dasSpielFeld.knoepfe[px][py].setBackground(Color.GREEN);
-        }
-        else if(anzahlLinksKlicks == 2) {
+            arrayeins.add(0, px);
+            arrayeins.add(1, py);
+
+        } else if (anzahlLinksKlicks == 2) {
             char wert = dieSpielDaten.gibFeldWert(px, py);
             dasSpielFeld.knoepfe[px][py].setText("" + wert);
             dasSpielFeld.knoepfe[px][py].setEnabled(false);
             wertalszahl = wert;
             vergleich.add(1, wertalszahl);
-            anzahlLinksKlicks = 3;
-        }
-        else {
-            System.out.println(Farben.ANSI_PURPLE + "Fehler in der Programmierung. Alle Felder werden verdeckt. Bitte klicke das Feld erneut an!");
+            arrayzwei.add(0, px);
+            arrayzwei.add(1, py);
+            anzahlLinksKlicks = 0;
+
+            for (int idx = 0; idx < spielfeldx; idx++) {
+                for (int idy = 0; idy < spielfeldy; idy++) {
+                    dasSpielFeld.knoepfe[idx][idy].setText("     ");
+                }
+            }
+            
+        } else {
+            System.out.println(Farben.ANSI_WHITE + Farben.ANSI_RED_BACKGROUND
+                    + "Fehler in der Programmierung. Alle Felder werden verdeckt. Bitte klicke das Feld erneut an!" + Farben.ANSI_RESET);
             for (int idx = 0; idx < spielfeldx; idx++) {
                 for (int idy = 0; idy < spielfeldy; idy++) {
                     dasSpielFeld.knoepfe[idx][idy].setText("     ");
@@ -68,27 +77,30 @@ public class SpielSteuerung {
 
         int vergleicheBuchstabe = Collections.frequency(vergleich, wertalszahl);
 
-        if(vergleicheBuchstabe == 2) {
-            dasSpielFeld.knoepfe[px][py].setBackground(Color.GREEN);
-            vergleich.remove(0);
-            vergleich.remove(1);
-            vergleich.remove(2);
+        if (vergleicheBuchstabe == 2) {
+            int parrxeins = arrayeins.get(0);
+            int parryeins = arrayeins.get(1);
+            int parrxzwei = arrayzwei.get(0);
+            int parryzwei = arrayzwei.get(1);
+            dasSpielFeld.knoepfe[parrxeins][parryeins].setBackground(Color.GREEN);
+            dasSpielFeld.knoepfe[parrxzwei][parryzwei].setBackground(Color.GREEN);
+            for (int i = 0; i < vergleich.size(); i++) {
+                vergleich.remove(i);
+            }
+            for (int i = 0; i < arrayeins.size(); i++) {
+                arrayeins.remove(i);
+            }
+            for (int i = 0; i < arrayzwei.size(); i++) {
+                arrayzwei.remove(i);
+            }
             for (int idx = 0; idx < spielfeldx; idx++) {
                 for (int idy = 0; idy < spielfeldy; idy++) {
                     dasSpielFeld.knoepfe[idx][idy].setText("     ");
                 }
             }
         }
-        else if (vergleicheBuchstabe == 1) {
-            for (int idx = 0; idx < spielfeldx; idx++) {
-                for (int idy = 0; idy < spielfeldy; idy++) {
-                    dasSpielFeld.knoepfe[idx][idy].setEnabled(true);
-                }
-            }
-        }
-            
         else {
-            
+            System.out.println("Noch nichts eingetragen hier in Zeile 102 bis 104");
         }
     }
 
