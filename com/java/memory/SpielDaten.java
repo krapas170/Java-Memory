@@ -8,6 +8,10 @@ class SpielDaten {
     private char memoryfeld[][];
     private int zzahl;
 
+    public ArrayList<Integer> vergleich = new ArrayList<>();
+    public ArrayList<Integer> arrayeins = new ArrayList<>();
+    public ArrayList<Integer> arrayzwei = new ArrayList<>();
+
     public SpielDaten(int xgroesse, int ygroesse) {
         //Das ist der Konstruktor, hier werden Initialisierungen vorgenommen
         //diese Methode wird zum Erzeugen des Objekts aufgerufen, 
@@ -15,6 +19,9 @@ class SpielDaten {
         //selben Typ benötigt, was bei uns nicht der Fall ist.
         memoryfeld = new char[xgroesse][ygroesse];
         ArrayList<Integer> BuchstabenListe = new ArrayList<>();
+        //ArrayList<Integer> vergleich = new ArrayList<>();
+        //ArrayList<Integer> arrayeins = new ArrayList<>();
+        //ArrayList<Integer> arrayzwei = new ArrayList<>();
 
         for (int idx = 0; idx < xgroesse; idx++) {
             for (int idy = 0; idy < ygroesse; idy++) {

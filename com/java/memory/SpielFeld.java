@@ -2,15 +2,11 @@ package com.java.memory;
 
 import java.awt.Container;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 public class SpielFeld extends JFrame {
 
@@ -21,12 +17,14 @@ public class SpielFeld extends JFrame {
     //JButton neustart = new JButton("Neustart");
 
     SpielSteuerung dieSpielSteuerung;
+    private int xgroesse = 0;
+    private int ygroesse = 0;
 
     public void fuegeAllesZurOberflaecheHinzu(final Container pane) {
         panel.setLayout(gitterLayout);
 
-        for (int cy = 0; cy < 6; cy++) {
-            for (int cx = 0; cx < 6; cx++) {
+        for (int cy = 0; cy < xgroesse; cy++) {
+            for (int cx = 0; cx < ygroesse; cx++) {
 
                 //erzeuge Button
                 knoepfe[cx][cy] = new Knopf(cx, cy);
