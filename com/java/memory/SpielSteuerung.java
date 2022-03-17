@@ -1,13 +1,6 @@
 package com.java.memory;
 
-import com.java.memory.Farben;
-
 import java.awt.Color;
-import java.beans.ExceptionListener;
-import java.util.ArrayList;
-import java.util.Collections;
-
-import javax.swing.GrayFilter;
 
 public class SpielSteuerung {
 
@@ -129,8 +122,8 @@ public class SpielSteuerung {
             }
             Main.beiFehlerSchließen();
         }
-        if (anzahlrichtige == ) {
-            
+        if (anzahlrichtige == 0) {
+
         }
     }
 
