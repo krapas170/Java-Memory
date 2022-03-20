@@ -1,16 +1,15 @@
 package com.java.memory;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author pasi0
  */
-public class Menue extends JFrame {
+public class Menue extends JPanel {
 
-    /**
-     * Creates new form Menue
-     */
+    JPanel panel = new JPanel();
+    
     public Menue() {
         initComponents();
     }
@@ -22,7 +21,7 @@ public class Menue extends JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+ void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();

@@ -1,8 +1,5 @@
 package com.java.memory;
 
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -16,15 +13,15 @@ public class Main {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
 
-                start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                //start.fuegeAllesZurOberflaecheHinzu(gitter.getContentPane());
-                start.pack();
                 start.setVisible(true);
 
-                if (start.addWindowListener(l);) {
-                    
-                } else {
-                    
+                while (start.isVisible() == true) {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                 }
 
                 gitter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
