@@ -1,18 +1,16 @@
 package com.java.memory;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.Container;
 
 /**
  *
  * @author pasi0
  */
-public class Menue extends JPanel {
+public class Menue extends JFrame {
 
     JPanel panel = new JPanel();
-    
-    public Menue() {
-        initComponents();
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -21,7 +19,7 @@ public class Menue extends JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
- void initComponents() {
+    public void initComponents(final Container pane) {
 
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -126,6 +124,7 @@ public class Menue extends JPanel {
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        pane.add(panel);
     }// </editor-fold>                        
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            

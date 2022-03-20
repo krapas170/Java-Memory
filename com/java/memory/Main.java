@@ -7,12 +7,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Menue start = new Menue();
-        SpielFeld gitter = new SpielFeld();
-
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
 
+                Menue start = new Menue();
+                SpielFeld gitter = new SpielFeld();
+
+                start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                start.initComponents(start.getContentPane());
                 start.setVisible(true);
 
                 while (start.isVisible() == true) {
