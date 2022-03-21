@@ -15,6 +15,7 @@ public class Main {
 
                 start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 start.initComponents(start.getContentPane());
+                start.pack();
                 start.setVisible(true);
 
                 /*
