@@ -5,29 +5,28 @@ import javax.swing.JOptionPane;
 
 public class Main {
 
+    static Menue start = new Menue();
+
     public static void main(String[] args) {
+
+        boolean MenueIsActive = start.isActive();
+
+        runMenue();
+
+        while (MenueIsActive == true) {
+            try {
+                Thread.sleep(100);
+                MenueIsActive = start.isActive();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
 
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
 
-                Menue start = new Menue();
                 SpielFeld gitter = new SpielFeld();
-
-                start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                start.initComponents(start.getContentPane());
-                start.pack();
-                start.setVisible(true);
-
-                /*
-                 * while (start.isVisible() == true) {
-                 * try {
-                 * Thread.sleep(500);
-                 * } catch (InterruptedException e) {
-                 * // TODO Auto-generated catch block
-                 * e.printStackTrace();
-                 * }
-                 * }
-                 */
 
                 gitter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 gitter.fuegeAllesZurOberflaecheHinzu(gitter.getContentPane());
@@ -35,6 +34,13 @@ public class Main {
                 gitter.setVisible(true);
             }
         });
+    }
+
+    public static void runMenue() {
+        start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        start.fuegeAllesZumMenueHinzu(start.getContentPane());
+        start.pack();
+        start.setVisible(true);
     }
 
     public static void beiFehlerSchließen() {

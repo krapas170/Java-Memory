@@ -19,8 +19,10 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   JButton neustart = new JButton("Neustart");
 
   SpielSteuerung dieSpielSteuerung;
-  private int xgroesse = 6;// wird noch automatisch ausgefüllt, sobald Menü fertig
-  private int ygroesse = 6;// wird noch automatisch ausgefüllt, sobald Menü fertig
+  Menue dasMenue;
+
+  private int xgroesse = Integer.parseInt(dasMenue.jTextField2.getText());
+  private int ygroesse = Integer.parseInt(dasMenue.jTextField1.getText());
 
   public void fuegeAllesZurOberflaecheHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
     panel.setLayout(gitterLayout);

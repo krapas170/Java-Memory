@@ -18,6 +18,7 @@ public class SpielSteuerung {
         for (int idx = 0; idx < spielfeldx; idx++) {
             for (int idy = 0; idy < spielfeldy; idy++) {
                 dasSpielFeld.knoepfe[idx][idy].setText("     ");
+                dasSpielFeld.knoepfe[idx][idy].setBackground(Color.WHITE);
             }
         }
 
