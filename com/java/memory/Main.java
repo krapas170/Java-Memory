@@ -17,14 +17,16 @@ public class Main {
                 start.initComponents(start.getContentPane());
                 start.setVisible(true);
 
-                while (start.isVisible() == true) {
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
+                /*
+                 * while (start.isVisible() == true) {
+                 * try {
+                 * Thread.sleep(500);
+                 * } catch (InterruptedException e) {
+                 * // TODO Auto-generated catch block
+                 * e.printStackTrace();
+                 * }
+                 * }
+                 */
 
                 gitter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 gitter.fuegeAllesZurOberflaecheHinzu(gitter.getContentPane());

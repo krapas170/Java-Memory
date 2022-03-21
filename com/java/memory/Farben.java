@@ -1,7 +1,9 @@
 package com.java.memory;
 
-public class Farben {
-    public static final String ANSI_RESET = "\u001B[0m";
+public class Farben { // Farben für die Konsole
+    public static final String ANSI_RESET = "\u001B[0m"; // Alle Farben werden zurückgesetzt
+
+    // Schriftfarben
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -11,6 +13,7 @@ public class Farben {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
+    // Hintergrundfarbe
     public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
     public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
     public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
