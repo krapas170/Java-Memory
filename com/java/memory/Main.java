@@ -51,4 +51,38 @@ public class Main {
         // JOptionPane.INFORMATION_MESSAGE, icon);
     }
 
+    static int Hoehe;
+    static int Breite;
+    static int Zeit;
+
+    public void setzeEinstellungen(int height, int weight, int time) {
+        Hoehe = height;
+        Breite = weight;
+        Zeit = time;
+    }
+    public static int gibHoehe() {
+        if (Hoehe > 0) {
+            return Hoehe;
+        } else {
+            System.out.println("Die Höhe hat keinen oder einen negativen Wert");
+            return 0;
+        }
+    }
+    public static int gibBreite() {
+        if (Breite > 0) {
+            return Breite;
+        } else {
+            System.out.println("Die Breite hat keinen oder einen negativen Wert");
+            return 0;
+        }
+    }
+    public static int gibZeit() {
+        if (Zeit > 0) {
+            return Zeit;
+        } else {
+            System.out.println("Die Zeit hat keinen oder einen negativen Wert");
+            return 0;
+        }
+    }
+
 }

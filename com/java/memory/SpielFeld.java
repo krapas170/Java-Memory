@@ -12,23 +12,35 @@ import javax.swing.JTextField;
 
 public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinzugefügt
 
-  public Knopf knoepfe[][] = new Knopf[6][6];
-  GridLayout gitterLayout = new GridLayout(0, 6);
+  SpielSteuerung dieSpielSteuerung;
+
+  int xgroesse = Menue.gibBreite();
+  int ygroesse = Menue.gibHoehe();
+  int zeit = Menue.gibZeit();
+
+  public Knopf knoepfe[][] = new Knopf[8][8];
+  GridLayout gitterLayout = new GridLayout(8, 8);
   JPanel panel = new JPanel();
   JTextField anzeige = new JTextField();
   JButton neustart = new JButton("Neustart");
 
-  SpielSteuerung dieSpielSteuerung;
-  Menue dasMenue;
-
-  private int xgroesse = Integer.parseInt(dasMenue.jTextField2.getText());
-  private int ygroesse = Integer.parseInt(dasMenue.jTextField1.getText());
+  //private int xgroesse = Menue.gibBreite();
+  //private int ygroesse = Menue.gibHoehe();
+  //private int time = Menue.gibZeit();
 
   public void fuegeAllesZurOberflaecheHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
     panel.setLayout(gitterLayout);
 
-    for (int cy = 0; cy < xgroesse; cy++) {
-      for (int cx = 0; cx < ygroesse; cx++) {
+    xgroesse = Menue.gibBreite();
+    ygroesse = Menue.gibHoehe();
+    zeit = Menue.gibZeit();
+
+    System.out.println(xgroesse);
+    System.out.println(ygroesse);
+    System.out.println(zeit);
+
+    for (int cx = 0; cx < xgroesse; cx++) {
+      for (int cy = 0; cy < ygroesse; cy++) {
 
         // erzeuge Button
         knoepfe[cx][cy] = new Knopf(cx, cy);

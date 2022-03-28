@@ -7,12 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.JTextField;
 
 public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugefügt
 
     JPanel panel = new JPanel();
+
+    Main Main;
 
     JTextField jTextField1 = new javax.swing.JTextField();
     JTextField jTextField2 = new javax.swing.JTextField();
@@ -117,23 +118,19 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
         pane.add(panel);
     }
 
-    public JTextField getHoehe() {
-        return jTextField1;
-    }
-
-    public JTextField getBreite() {
-        return jTextField2;
-    }
-
-    public JTextField getZeit() {
-        return jTextField3;
-    }
-
     public boolean active = true;
 
+    static int height;
+    static int weight;
+    static int time;
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        height = Integer.parseInt(jTextField1.getText());
+        weight = Integer.parseInt(jTextField2.getText());
+        time = Integer.parseInt(jTextField3.getText());
         System.out.print("Menü geschlossen!");
         active = false;
+        //Main.setzeEinstellungen(height, weight, time);
     }
 
     public boolean isActive() {
@@ -146,6 +143,31 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
 
     public void closeMenue() {
         setVisible(false);
-        dispose();
+        //dispose();
+    }
+
+    public static int gibHoehe() {
+        if (height > 0) {
+            return height;
+        } else {
+            System.out.println("Die Höhe hat keinen oder einen negativen Wert");
+            return 0;
+        }
+    }
+    public static int gibBreite() {
+        if (weight > 0) {
+            return weight;
+        } else {
+            System.out.println("Die Breite hat keinen oder einen negativen Wert");
+            return 0;
+        }
+    }
+    public static int gibZeit() {
+        if (time > 0) {
+            return time;
+        } else {
+            System.out.println("Die Zeit hat keinen oder einen negativen Wert");
+            return 0;
+        }
     }
 }

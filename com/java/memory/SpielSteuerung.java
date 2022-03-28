@@ -6,18 +6,19 @@ public class SpielSteuerung {
 
     private SpielDaten dieSpielDaten;
     private SpielFeld dasSpielFeld;
-    private int spielfeldx = 6;
-    private int spielfeldy = 6;
+    int xgroesse = Menue.gibBreite();
+    int ygroesse = Menue.gibHoehe();
+    int zeit = Menue.gibZeit();
     private int anzahlLinksKlicks = 0;
     private int anzahlrichtige = 0;
 
     SpielSteuerung(SpielFeld pFeld) {
         dasSpielFeld = pFeld;
-        dieSpielDaten = new SpielDaten(spielfeldx, spielfeldy);
+        dieSpielDaten = new SpielDaten(xgroesse, ygroesse);
 
-        for (int idx = 0; idx < spielfeldx; idx++) {
-            for (int idy = 0; idy < spielfeldy; idy++) {
-                dasSpielFeld.knoepfe[idx][idy].setText("     ");
+        for (int idx = 0; idx < xgroesse; idx++) {
+            for (int idy = 0; idy < ygroesse; idy++) {
+                dasSpielFeld.knoepfe[idx][idy].setText("    ");
                 dasSpielFeld.knoepfe[idx][idy].setBackground(Color.WHITE);
             }
         }
@@ -51,8 +52,8 @@ public class SpielSteuerung {
             System.out.println(Farben.ANSI_WHITE + Farben.ANSI_RED_BACKGROUND
                     + "Fehler in der Programmierung. Alle Felder werden verdeckt. Bitte klicke das Feld erneut an!"
                     + Farben.ANSI_RESET);
-            for (int idx = 0; idx < spielfeldx; idx++) {
-                for (int idy = 0; idy < spielfeldy; idy++) {
+            for (int idx = 0; idx < xgroesse; idx++) {
+                for (int idy = 0; idy < ygroesse; idy++) {
                     dasSpielFeld.knoepfe[idx][idy].setText("     ");
                 }
             }
@@ -106,8 +107,8 @@ public class SpielSteuerung {
             for (int i = 0; i < dieSpielDaten.arrayzwei.size(); i++) {
                 dieSpielDaten.arrayzwei.clear();
             }
-            for (int idx = 0; idx < spielfeldx; idx++) {
-                for (int idy = 0; idy < spielfeldy; idy++) {
+            for (int idx = 0; idx < xgroesse; idx++) {
+                for (int idy = 0; idy < ygroesse; idy++) {
                     dasSpielFeld.knoepfe[idx][idy].setText("     ");
                 }
             }
@@ -116,8 +117,8 @@ public class SpielSteuerung {
         else {
             System.out.println(Farben.ANSI_RED_BACKGROUND + Farben.ANSI_WHITE
                     + "Fehler im Array 'vergleich'! Beende das Spiel!" + Farben.ANSI_RESET);
-            for (int idx = 0; idx < spielfeldx; idx++) {
-                for (int idy = 0; idy < spielfeldy; idy++) {
+            for (int idx = 0; idx < xgroesse; idx++) {
+                for (int idy = 0; idy < ygroesse; idy++) {
                     dasSpielFeld.knoepfe[idx][idy].setBackground(Color.RED);
                 }
             }
