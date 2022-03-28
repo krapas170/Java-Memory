@@ -18,8 +18,8 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   int ygroesse = Menue.gibHoehe();
   int zeit = Menue.gibZeit();
 
-  public Knopf knoepfe[][] = new Knopf[8][8];
-  GridLayout gitterLayout = new GridLayout(8, 8);
+  public Knopf knoepfe[][] = new Knopf[xgroesse][ygroesse];
+  GridLayout gitterLayout = new GridLayout(0, xgroesse);
   JPanel panel = new JPanel();
   JTextField anzeige = new JTextField();
   JButton neustart = new JButton("Neustart");

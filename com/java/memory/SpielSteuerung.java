@@ -29,24 +29,11 @@ public class SpielSteuerung {
 
         anzahlLinksKlicks++;
 
-        int wertalszahl = 0;
-
         if (anzahlLinksKlicks == 1) {
-            char wert = dieSpielDaten.gibFeldWert(px, py);
-            setzeFeldWert(px, py);
-            wertalszahl = wert;
-            dieSpielDaten.vergleich.add(wertalszahl);
-            dieSpielDaten.arrayeins.add(0, px);
-            dieSpielDaten.arrayeins.add(1, py);
+            setzeFeld1(px, py);
 
         } else if (anzahlLinksKlicks == 2) {
-            char wert = dieSpielDaten.gibFeldWert(px, py);
-            setzeFeldWert(px, py);
-            wertalszahl = wert;
-            dieSpielDaten.vergleich.add(wertalszahl);
-            dieSpielDaten.arrayzwei.add(0, px);
-            dieSpielDaten.arrayzwei.add(1, py);
-            anzahlLinksKlicks = 0;
+            setzeFeld2(px, py);
 
         } else {
             System.out.println(Farben.ANSI_WHITE + Farben.ANSI_RED_BACKGROUND
@@ -131,6 +118,29 @@ public class SpielSteuerung {
         checkenoballesrichtig();
     }
 
+    private void setzeFeld2(int px, int py) {
+        int wertalszahl = 0;
+        char wert = dieSpielDaten.gibFeldWert(px, py);
+        setzeFeldWert(px, py);
+        sperreFeld(px, py);
+        wertalszahl = wert;
+        dieSpielDaten.vergleich.add(wertalszahl);
+        dieSpielDaten.arrayzwei.add(0, px);
+        dieSpielDaten.arrayzwei.add(1, py);
+        anzahlLinksKlicks = 0;
+    }
+
+    private void setzeFeld1(int px, int py) {
+        int wertalszahl = 0;
+        char wert = dieSpielDaten.gibFeldWert(px, py);
+        setzeFeldWert(px, py);
+        sperreFeld(px, py);
+        wertalszahl = wert;
+        dieSpielDaten.vergleich.add(wertalszahl);
+        dieSpielDaten.arrayeins.add(0, px);
+        dieSpielDaten.arrayeins.add(1, py);
+    }
+
     private void checkenoballesrichtig() {
     }
 
@@ -144,7 +154,14 @@ public class SpielSteuerung {
     public void setzeFeldWert(int px, int py) {
         char wert = dieSpielDaten.gibFeldWert(px, py);
         dasSpielFeld.knoepfe[px][py].setText("" + wert);
+    }
+
+    public void sperreFeld(int px, int py) {
         dasSpielFeld.knoepfe[px][py].setEnabled(false);
+    }
+
+    public void gebeFeldfrei(int px, int py) {
+        dasSpielFeld.knoepfe[px][py].setEnabled(true);
     }
 
 }
