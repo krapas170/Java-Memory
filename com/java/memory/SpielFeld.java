@@ -24,9 +24,9 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   JTextField anzeige = new JTextField();
   JButton neustart = new JButton("Neustart");
 
-  //private int xgroesse = Menue.gibBreite();
-  //private int ygroesse = Menue.gibHoehe();
-  //private int time = Menue.gibZeit();
+  // private int xgroesse = Menue.gibBreite();
+  // private int ygroesse = Menue.gibHoehe();
+  // private int time = Menue.gibZeit();
 
   public void fuegeAllesZurOberflaecheHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
     panel.setLayout(gitterLayout);

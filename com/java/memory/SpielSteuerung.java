@@ -18,7 +18,7 @@ public class SpielSteuerung {
 
         for (int idx = 0; idx < xgroesse; idx++) {
             for (int idy = 0; idy < ygroesse; idy++) {
-                dasSpielFeld.knoepfe[idx][idy].setText("    ");
+                dasSpielFeld.knoepfe[idx][idy].setText("     ");
                 dasSpielFeld.knoepfe[idx][idy].setBackground(Color.WHITE);
             }
         }
@@ -127,6 +127,11 @@ public class SpielSteuerung {
         if (anzahlrichtige == 0) {
 
         }
+
+        checkenoballesrichtig();
+    }
+
+    private void checkenoballesrichtig() {
     }
 
     public void rechtsKlick(int px, int py) {
