@@ -109,7 +109,9 @@ public class SpielSteuerung {
                     dasSpielFeld.knoepfe[idx][idy].setBackground(Color.RED);
                 }
             }
-            Main.beiFehlerSchließen();
+            String uberschrift = "Fehler 375";
+            String meldung = "Fehler im Array 'vergleich'! Beende das Spiel!";
+            Main.beiFehlerSchließen(uberschrift, meldung);
         }
         if (anzahlrichtige == 0) {
 

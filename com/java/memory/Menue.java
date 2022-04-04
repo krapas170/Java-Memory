@@ -145,6 +145,19 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 height = Integer.parseInt(jTextField1.getText());
                 weight = Integer.parseInt(jTextField2.getText());
                 time = Integer.parseInt(jTextField3.getText());
+
+                if (height * weight % 2 == 0) {
+
+                } else if (height * weight % 2 == 1) {
+                        String uberschrift = "Falsche Breite oder Höhe";
+                        String meldung = "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!";
+                        Main.beiFehlerSchließen(uberschrift, meldung);
+                        System.out.println(
+                                        "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!");
+                } else {
+
+                }
+
                 System.out.print("Menü geschlossen!");
                 active = false;
                 setVisible(false);

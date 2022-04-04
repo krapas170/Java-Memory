@@ -1,5 +1,6 @@
 package com.java.memory;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -13,12 +14,11 @@ public class Main {
 
         runMenue();
 
-        while (MenueIsActive == true) {
+        while (MenueIsActive) {
             try {
                 Thread.sleep(100);
                 MenueIsActive = start.isActive();
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -43,12 +43,13 @@ public class Main {
         start.setVisible(true);
     }
 
-    public static void beiFehlerSchließen() {
-        JOptionPane.showMessageDialog(null, "Leider ist ein Fehler aufgetaucht. Bitte überprüfe den Code!");
+    public static void beiFehlerSchließen(String uberschrift, String meldung) {
+        //JOptionPane.showMessageDialog(null, "Leider ist ein Fehler aufgetaucht. Bitte überprüfe den Code!");
+
+        ImageIcon icon = new ImageIcon("Fehler.jpg");
+        JOptionPane.showMessageDialog(null, meldung, uberschrift,
+                JOptionPane.INFORMATION_MESSAGE, icon);
         System.exit(0);
-        // ImageIcon icon = new ImageIcon("Fehler.jpg");
-        // JOptionPane.showMessageDialog(null, "Eine Meldung", "Meldung",
-        // JOptionPane.INFORMATION_MESSAGE, icon);
     }
 
     static int Hoehe;
