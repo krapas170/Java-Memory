@@ -135,11 +135,12 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 pane.add(panel);
         }
 
-        public boolean active = true;
+        private boolean active = true;
 
         static int height;
         static int weight;
         static int time;
+        static boolean feldgroessekorrekt = false;
 
         private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
                 height = Integer.parseInt(jTextField1.getText());
@@ -147,21 +148,29 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 time = Integer.parseInt(jTextField3.getText());
 
                 if (height * weight % 2 == 0) {
-
-                } else if (height * weight % 2 == 1) {
-                        String uberschrift = "Falsche Breite oder Höhe";
-                        String meldung = "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!";
-                        Main.beiFehlerSchließen(uberschrift, meldung);
-                        System.out.println(
-                                        "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!");
+                        feldgroessekorrekt = true;
                 } else {
-
+                        feldgroessekorrekt = false;
                 }
 
-                System.out.print("Menü geschlossen!");
-                active = false;
-                setVisible(false);
-                // Main.setzeEinstellungen(height, weight, time);
+                feldgroessekorrekt();
+        }
+
+        private void feldgroessekorrekt() {
+                if (feldgroessekorrekt == true) {
+                        System.out.print(Farben.ANSI_GREEN + "Menü geschlossen!" + Farben.ANSI_RESET);
+                        active = false;
+                        setVisible(false);
+                        // Main.setzeEinstellungen(height, weight, time);
+                } else {
+                        String uberschrift = "Falsche Breite oder Höhe";
+                        String meldung = "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!";
+                        Main.beiFehlerFortsetzen(uberschrift, meldung);
+                        System.out.println(
+                                        Farben.ANSI_RED_BACKGROUND + Farben.ANSI_WHITE
+                                                        + "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!"
+                                                        + Farben.ANSI_RESET);
+                }
         }
 
         public boolean isActive() {
@@ -172,13 +181,8 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 }
         }
 
-        public void closeMenue() {
-                setVisible(false);
-                // dispose();
-        }
-
         public static int gibHoehe() {
-                if (height > 0) {
+                if (height >= 0) {
                         return height;
                 } else {
                         System.out.println("Die Höhe hat keinen oder einen negativen Wert");
@@ -187,7 +191,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
         }
 
         public static int gibBreite() {
-                if (weight > 0) {
+                if (weight >= 0) {
                         return weight;
                 } else {
                         System.out.println("Die Breite hat keinen oder einen negativen Wert");
@@ -196,7 +200,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
         }
 
         public static int gibZeit() {
-                if (time > 0) {
+                if (time >= 0) {
                         return time;
                 } else {
                         System.out.println("Die Zeit hat keinen oder einen negativen Wert");
