@@ -69,7 +69,8 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
               int px = ((Knopf) e.getSource()).gibX();
               int py = ((Knopf) e.getSource()).gibY();
               // System.out.println(px + "/" + py + " wurde gedrueckt");
-              dieSpielSteuerung.linksKlick(px, py);
+              dieSpielSteuerung.sperreFeld(px, py);
+              dieSpielSteuerung.linksKlick(px, py);              
             }
             if (e.getButton() == MouseEvent.BUTTON2) {
               // System.out.println("Middle Click!");
