@@ -2,8 +2,6 @@ package com.java.memory;
 
 import java.awt.Color;
 
-import javafx.scene.input.MouseEvent;
-
 public class SpielSteuerung {
 
     private SpielDaten dieSpielDaten;

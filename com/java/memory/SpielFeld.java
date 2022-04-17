@@ -2,8 +2,10 @@ package com.java.memory;
 
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.EventListener;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,6 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import javafx.event.ActionEvent;
 
 public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinzugefügt
 
@@ -50,7 +54,20 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
         // fuege Button dem Layout hinzu
         panel.add(knoepfe[cx][cy]);
 
-        knoepfe[cx][cy].addMouseListener(new MouseListener() {
+        knoepfe[cx][cy].addActionListener(new ActionListener() {
+
+          @Override
+          public void actionPerformed(java.awt.event.ActionEvent e) {
+            // System.out.println("Links Klick!");
+            int px = ((Knopf) e.getSource()).gibX();
+            int py = ((Knopf) e.getSource()).gibY();
+            // System.out.println(px + "/" + py + " wurde gedrueckt");
+            dieSpielSteuerung.sperreFeld(px, py);
+            dieSpielSteuerung.linksKlick(px, py);
+          }
+        });
+
+        /*knoepfe[cx][cy].addMouseListener(new MouseListener() {
           public void mousePressed(MouseEvent e) {
           }
 
@@ -70,7 +87,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
               int py = ((Knopf) e.getSource()).gibY();
               // System.out.println(px + "/" + py + " wurde gedrueckt");
               dieSpielSteuerung.sperreFeld(px, py);
-              dieSpielSteuerung.linksKlick(px, py);              
+              dieSpielSteuerung.linksKlick(px, py);
             }
             if (e.getButton() == MouseEvent.BUTTON2) {
               // System.out.println("Middle Click!");
@@ -83,7 +100,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
               dieSpielSteuerung.rechtsKlick(px, py);
             }
           }
-        });
+        });*/
 
       }
     }
