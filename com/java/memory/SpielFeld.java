@@ -3,10 +3,7 @@ package com.java.memory;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.EventListener;
-import java.util.Date;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,8 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import javafx.event.ActionEvent;
 
 public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinzugefügt
 
@@ -33,6 +28,11 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   JPanel panel = new JPanel();
   JTextField anzeige = new JTextField();
   JButton neustart = new JButton("Neustart");
+
+  public void reload() {
+    this.setVisible(false);
+    Main.main(null);
+  }
 
   public void fuegeAllesZurOberflaecheHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
     panel.setLayout(gitterLayout);
@@ -67,54 +67,62 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
           }
         });
 
-        /*knoepfe[cx][cy].addMouseListener(new MouseListener() {
-          public void mousePressed(MouseEvent e) {
-          }
-
-          public void mouseReleased(MouseEvent e) {
-          }
-
-          public void mouseEntered(MouseEvent e) {
-          }
-
-          public void mouseExited(MouseEvent e) {
-          }
-
-          public void mouseClicked(MouseEvent e) {
-            if (e.getButton() == MouseEvent.BUTTON1) {
-              // System.out.println("Links Klick!");
-              int px = ((Knopf) e.getSource()).gibX();
-              int py = ((Knopf) e.getSource()).gibY();
-              // System.out.println(px + "/" + py + " wurde gedrueckt");
-              dieSpielSteuerung.sperreFeld(px, py);
-              dieSpielSteuerung.linksKlick(px, py);
-            }
-            if (e.getButton() == MouseEvent.BUTTON2) {
-              // System.out.println("Middle Click!");
-            }
-            if (e.getButton() == MouseEvent.BUTTON3) {
-              // System.out.println("Rechts Klick!");
-              int px = ((Knopf) e.getSource()).gibX();
-              int py = ((Knopf) e.getSource()).gibY();
-              // System.out.println(px + "/" + py + " wurde gedrueckt");
-              dieSpielSteuerung.rechtsKlick(px, py);
-            }
-          }
-        });*/
+        /*
+         * knoepfe[cx][cy].addMouseListener(new MouseListener() {
+         * public void mousePressed(MouseEvent e) {
+         * }
+         * 
+         * public void mouseReleased(MouseEvent e) {
+         * }
+         * 
+         * public void mouseEntered(MouseEvent e) {
+         * }
+         * 
+         * public void mouseExited(MouseEvent e) {
+         * }
+         * 
+         * public void mouseClicked(MouseEvent e) {
+         * if (e.getButton() == MouseEvent.BUTTON1) {
+         * // System.out.println("Links Klick!");
+         * int px = ((Knopf) e.getSource()).gibX();
+         * int py = ((Knopf) e.getSource()).gibY();
+         * // System.out.println(px + "/" + py + " wurde gedrueckt");
+         * dieSpielSteuerung.sperreFeld(px, py);
+         * dieSpielSteuerung.linksKlick(px, py);
+         * }
+         * if (e.getButton() == MouseEvent.BUTTON2) {
+         * // System.out.println("Middle Click!");
+         * }
+         * if (e.getButton() == MouseEvent.BUTTON3) {
+         * // System.out.println("Rechts Klick!");
+         * int px = ((Knopf) e.getSource()).gibX();
+         * int py = ((Knopf) e.getSource()).gibY();
+         * // System.out.println(px + "/" + py + " wurde gedrueckt");
+         * dieSpielSteuerung.rechtsKlick(px, py);
+         * }
+         * }
+         * });
+         */
 
       }
     }
 
     // fuege die Textanzeige hinzu
-    // panel.add(neustart);
-    // neustart.addActionListener((ActionEvent e) -> {
-    // Main.main(null);
-    // System.exit(0);
-    // });
-    // panel.add(anzeige);
+    panel.add(neustart);
+    neustart.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent e) {
+
+        reload();
+
+      }
+
+    });
+    panel.add(anzeige);
     pane.add(panel);
     dieSpielSteuerung = new SpielSteuerung(this);
-    Zeitschaltung();
+    // Zeitschaltung();
   }
 
   public void Zeitschaltung() {

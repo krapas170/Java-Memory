@@ -144,6 +144,11 @@ public class SpielSteuerung {
     }
 
     private void checkenoballesrichtig() {
+        for (int idx = 0; idx < xgroesse; idx++) {
+            for (int idy = 0; idy < ygroesse; idy++) {
+                if (dasSpielFeld.knoepfe[idx][idy].getBackground()!= Color.GREEN);
+            }
+        }
     }
 
     public void rechtsKlick(int px, int py) {
@@ -165,7 +170,7 @@ public class SpielSteuerung {
 
     public void gebeFeldfrei(int px, int py) {
         dasSpielFeld.knoepfe[px][py].setEnabled(true);
-        dasSpielFeld.knoepfe[px][py].addMouseListener(null);
+        dasSpielFeld.knoepfe[px][py].addActionListener(null);
     }
 
 }

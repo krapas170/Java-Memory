@@ -13,8 +13,6 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
 
         JPanel panel = new JPanel();
 
-        Main Main;
-
         JTextField jTextField1 = new javax.swing.JTextField();
         JTextField jTextField2 = new javax.swing.JTextField();
         JTextField jTextField3 = new javax.swing.JTextField();

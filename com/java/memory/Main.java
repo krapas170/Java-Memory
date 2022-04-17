@@ -9,6 +9,7 @@ public class Main {
     static Menue start = new Menue();
 
     public static void main(String[] args) {
+        boolean GameIsVisable = true;
 
         boolean MenueIsActive = start.isActive();
 
