@@ -122,7 +122,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     panel.add(anzeige);
     pane.add(panel);
     dieSpielSteuerung = new SpielSteuerung(this);
-    // Zeitschaltung();
+    Zeitschaltung();
   }
 
   public void Zeitschaltung() {
@@ -144,7 +144,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
           // TODO Auto-generated catch block
           e.printStackTrace();
         }
-        if (zeit1 <= 0) {
+        if (zeit1 == 0) {
           verloren();
         } else {
         }

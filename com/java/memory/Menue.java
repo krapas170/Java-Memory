@@ -33,8 +33,8 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
 
                 jLabel1.setText("Herzlich willkommen beim Memory-Game");
                 jLabel2.setText("Sicherlich kennst du bereits die Regeln von dem Spiel");
-                jLabel3.setText("Zum Einstellen des Spiels gib bitte unten die Feldgröße");
-                jLabel4.setText("und die Zeit ein. Maximale Anzahl der Felder ist 56.");
+                jLabel3.setText("Zum Einstellen des Spiels gib bitte unten die Anzahl der Felder an");
+                jLabel4.setText("und die Zeit ein. Maximale Anzahl der Felder ist 52.");
 
                 jLabel5.setText("Höhe:");
                 jLabel6.setText("Breite:");
