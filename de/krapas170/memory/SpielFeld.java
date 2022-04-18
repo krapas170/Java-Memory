@@ -1,9 +1,8 @@
-package com.java.memory;
+package de.krapas170.memory;
 
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -159,7 +158,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
 
   private void verloren() {
 
-    ImageIcon icon = new ImageIcon("verloren.gif");
+    ImageIcon icon = new ImageIcon("assets/verloren.gif");
     JOptionPane.showMessageDialog(null, "Die Zeit ist um und du hast es leider nicht geschafft!", "Zeit um",
         JOptionPane.INFORMATION_MESSAGE, icon);
     System.exit(0);
@@ -167,7 +166,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
 
   private void gewonnen() {
 
-    ImageIcon icon = new ImageIcon("gewonnen.gif");
+    ImageIcon icon = new ImageIcon("assets/gewonnen.gif");
     JOptionPane.showMessageDialog(null, "Du hast alle Felder gefunden!", "Geschafft",
         JOptionPane.INFORMATION_MESSAGE, icon);
   }

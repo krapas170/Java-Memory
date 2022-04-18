@@ -1,4 +1,4 @@
-package com.java.memory;
+package de.krapas170.memory;
 
 import java.awt.Container;
 
