@@ -3,6 +3,7 @@ package de.krapas170.memory;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -117,6 +118,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     long delay = 2500;
     long period = zeit1;
     timer.schedule(task, delay, period);
+
   }
 
   private void verloren() {
@@ -127,10 +129,27 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     System.exit(0);
   }
 
-  private void gewonnen() {
+  public void gewonnen() {
+
+    int input = zeit1;
+
+    zeit1 = -1;
+
+    final double scale3600 = 1.0 / 3600;
+    final double scale60 = 1.0 / 60;
+    int hh = (int) (input * scale3600);
+    int mm = (int) (input * scale60);
+    int ss = input - mm * 60 - hh * 3600;
+
+    DecimalFormat format = new DecimalFormat("00");
 
     ImageIcon icon = new ImageIcon("assets/gewonnen.gif");
-    JOptionPane.showMessageDialog(null, "Du hast alle Felder gefunden!", "Geschafft",
+    JOptionPane.showMessageDialog(null,
+        "Du hast alle Felder aufgedeckt und hattest noch " + format.format(hh) + ":" + format.format(mm) + ":"
+            + format.format(ss) + " übrig!",
+        "Geschafft",
         JOptionPane.INFORMATION_MESSAGE, icon);
+    System.exit(0);
+
   }
 }

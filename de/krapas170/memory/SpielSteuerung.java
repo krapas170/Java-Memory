@@ -113,11 +113,9 @@ public class SpielSteuerung {
             String meldung = "Fehler im Array 'vergleich'! Beende das Spiel!";
             Main.beiFehlerSchließen(uberschrift, meldung);
         }
-        if (anzahlrichtige == 0) {
-
+        if (anzahlrichtige == xgroesse*ygroesse) {
+            dasSpielFeld.gewonnen();
         }
-
-        checkenoballesrichtig();
     }
 
     private void setzeFeld1(int px, int py) {
@@ -141,14 +139,6 @@ public class SpielSteuerung {
         dieSpielDaten.arrayzwei.add(0, px);
         dieSpielDaten.arrayzwei.add(1, py);
         anzahlLinksKlicks = 0;
-    }
-
-    private void checkenoballesrichtig() {
-        for (int idx = 0; idx < xgroesse; idx++) {
-            for (int idy = 0; idy < ygroesse; idy++) {
-                if (dasSpielFeld.knoepfe[idx][idy].getBackground()!= Color.GREEN);
-            }
-        }
     }
 
     public void rechtsKlick(int px, int py) {
