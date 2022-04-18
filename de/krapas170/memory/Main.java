@@ -1,4 +1,4 @@
-package com.java.memory;
+package de.krapas170.memory;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -46,7 +46,7 @@ public class Main {
 
     public static void beiFehlerSchließen(String uberschrift, String meldung) {
 
-        ImageIcon icon = new ImageIcon("Fehler.jpg");
+        ImageIcon icon = new ImageIcon("assets/Fehler.jpg");
         JOptionPane.showMessageDialog(null, meldung, uberschrift,
                 JOptionPane.INFORMATION_MESSAGE, icon);
         System.exit(0);
@@ -54,7 +54,7 @@ public class Main {
 
     public static void beiFehlerFortsetzen(String uberschrift, String meldung) {
 
-        ImageIcon icon = new ImageIcon("Fehler.jpg");
+        ImageIcon icon = new ImageIcon("assets/Fehler.jpg");
         JOptionPane.showMessageDialog(null, meldung, uberschrift,
                 JOptionPane.INFORMATION_MESSAGE, icon);
     }

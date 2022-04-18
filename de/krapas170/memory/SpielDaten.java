@@ -1,4 +1,4 @@
-package com.java.memory;
+package de.krapas170.memory;
 
 import java.util.ArrayList;
 import java.util.Collections;
