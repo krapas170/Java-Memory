@@ -1,6 +1,7 @@
 package de.krapas170.memory;
 
 import java.awt.Container;
+import java.awt.Font;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -32,9 +33,10 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 JButton jButton1 = new javax.swing.JButton();
 
                 jLabel1.setText("Herzlich willkommen beim Memory-Game");
+                jLabel1.setFont(new Font("Arial", Font.BOLD, 21));
                 jLabel2.setText("Sicherlich kennst du bereits die Regeln von dem Spiel");
-                jLabel3.setText("Zum Einstellen des Spiels gib bitte unten die Anzahl der Felder an");
-                jLabel4.setText("und die Zeit ein. Maximale Anzahl der Felder ist 52.");
+                jLabel3.setText("Zum Einstellen des Spiels gib bitte unten die Anzahl der Felder");
+                jLabel4.setText("und die Zeit ein. Maximale Anzahl der Felder ist 104.");
 
                 jLabel5.setText("Höhe:");
                 jLabel6.setText("Breite:");
@@ -88,7 +90,8 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                                                                 80,
                                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                                                .addComponent(jLabel3))))
+                                                                                                                .addComponent(jLabel3)
+                                                                                                                .addComponent(jLabel4))))
                                                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                 Short.MAX_VALUE)));
                 layout.setVerticalGroup(
@@ -101,6 +104,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                                                                 .addComponent(jLabel2)
                                                                 .addGap(36, 36, 36)
                                                                 .addComponent(jLabel3)
+                                                                .addComponent(jLabel4)
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addGap(31, 31, 31)

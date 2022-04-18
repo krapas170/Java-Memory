@@ -1,6 +1,6 @@
 package de.krapas170.memory;
 
-public class Farben { // Farben für die Konsole
+public class Farben {
     public static final String ANSI_RESET = "\u001B[0m"; // Alle Farben werden zurückgesetzt
 
     // Schriftfarben

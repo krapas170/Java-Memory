@@ -66,43 +66,6 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
           }
         });
 
-        /*
-         * knoepfe[cx][cy].addMouseListener(new MouseListener() {
-         * public void mousePressed(MouseEvent e) {
-         * }
-         * 
-         * public void mouseReleased(MouseEvent e) {
-         * }
-         * 
-         * public void mouseEntered(MouseEvent e) {
-         * }
-         * 
-         * public void mouseExited(MouseEvent e) {
-         * }
-         * 
-         * public void mouseClicked(MouseEvent e) {
-         * if (e.getButton() == MouseEvent.BUTTON1) {
-         * // System.out.println("Links Klick!");
-         * int px = ((Knopf) e.getSource()).gibX();
-         * int py = ((Knopf) e.getSource()).gibY();
-         * // System.out.println(px + "/" + py + " wurde gedrueckt");
-         * dieSpielSteuerung.sperreFeld(px, py);
-         * dieSpielSteuerung.linksKlick(px, py);
-         * }
-         * if (e.getButton() == MouseEvent.BUTTON2) {
-         * // System.out.println("Middle Click!");
-         * }
-         * if (e.getButton() == MouseEvent.BUTTON3) {
-         * // System.out.println("Rechts Klick!");
-         * int px = ((Knopf) e.getSource()).gibX();
-         * int py = ((Knopf) e.getSource()).gibY();
-         * // System.out.println(px + "/" + py + " wurde gedrueckt");
-         * dieSpielSteuerung.rechtsKlick(px, py);
-         * }
-         * }
-         * });
-         */
-
       }
     }
 

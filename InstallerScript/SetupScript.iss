@@ -24,11 +24,11 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 ChangesAssociations=yes
 DisableProgramGroupPage=yes
-InfoAfterFile=C:\Users\pasi0\OneDrive\Dokumente\PersÃ¶nlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\README.md
+InfoAfterFile=C:\Users\pasi0\OneDrive\Dokumente\Persönlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\README.md
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=C:\Users\pasi0\OneDrive\Dokumente\PersÃ¶nlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\InstallerScript
+OutputDir=C:\Users\pasi0\OneDrive\Dokumente\Persönlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\InstallerScript
 OutputBaseFilename=java-memory-installer
 Compression=lzma
 SolidCompression=yes
@@ -41,12 +41,12 @@ Name: "german"; MessagesFile: "compiler:Languages\German.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\pasi0\OneDrive\Dokumente\PersÃ¶nlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\pasi0\OneDrive\Dokumente\PersÃ¶nlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\Fehler.jpg"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\pasi0\OneDrive\Dokumente\PersÃ¶nlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\gewonnen.gif"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\pasi0\OneDrive\Dokumente\PersÃ¶nlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\verloren.gif"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\pasi0\OneDrive\Dokumente\PersÃ¶nlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\ReadMe.md"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\pasi0\OneDrive\Dokumente\PersÃ¶nlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\Java-Memory.jar"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\pasi0\OneDrive\Dokumente\Persönlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\pasi0\OneDrive\Dokumente\Persönlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\assets\Fehler.jpg"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist createallsubdirs
+Source: "C:\Users\pasi0\OneDrive\Dokumente\Persönlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\assets\gewonnen.gif"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist createallsubdirs
+Source: "C:\Users\pasi0\OneDrive\Dokumente\Persönlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\assets\verloren.gif"; DestDir: "{app}"; Flags: ignoreversion onlyifdoesntexist createallsubdirs
+Source: "C:\Users\pasi0\OneDrive\Dokumente\Persönlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\ReadMe.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\pasi0\OneDrive\Dokumente\Persönlich\Schule\Geschwister-Scholl-Schule\12I\AIT\Java\Java-Memory\Java-Memory.jar"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]

@@ -63,10 +63,4 @@ public class Main {
     static int Breite;
     static int Zeit;
 
-    public void setzeEinstellungen(int height, int weight, int time) {
-        Hoehe = height;
-        Breite = weight;
-        Zeit = time;
-    }
-
 }
