@@ -1,2 +1,5 @@
-/Java-Memory/nbproject/private/
+nbproject
 Java-Memory.jar
+lib
+InstallerScript
+.vscode
