@@ -35,6 +35,10 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     Main.main(null);
   }
 
+  public void exit() {
+    System.exit(0);
+  }
+
   public void fuegeAllesZurOberflaecheHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
     panel.setLayout(gitterLayout);
 
@@ -79,6 +83,17 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
       public void actionPerformed(java.awt.event.ActionEvent e) {
 
         reload();
+
+      }
+
+    });
+    panel.add(beenden);
+    beenden.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(java.awt.event.ActionEvent e) {
+
+        exit();
 
       }
 
