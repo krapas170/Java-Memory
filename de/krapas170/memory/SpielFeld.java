@@ -28,7 +28,6 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   JPanel panel = new JPanel();
   JTextField anzeige = new JTextField();
   JButton neustart = new JButton("Neustart");
-
   JButton beenden = new JButton("Beenden");
 
   public void reload() {
