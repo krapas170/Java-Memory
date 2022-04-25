@@ -9,7 +9,7 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="Java-Memory" default="default" basedir=".">
     <description>Builds, tests, and runs the project Java-Memory.</description>
-    <import file="nbproject/build-impl.xml"/>
+    <import file="lib/gson-2.9.0.jar"/>
     <!--
 
     There exist several targets which are by default empty and which can be 
