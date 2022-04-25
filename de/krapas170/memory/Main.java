@@ -112,7 +112,10 @@ public class Main {
             while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
                 fileOS.write(data, 0, byteContent);
             }
+            inputStream.close();
             isTwoJsonEquals();
+            Path server = FileSystems.getDefault().getPath("version-server.json");
+            Files.delete(server);
         } catch (IOException e) {
             System.out.print(Farben.ANSI_RED + "Fehler beim Überprüfen der aktuellen Version" + Farben.ANSI_RESET);
         }
@@ -158,21 +161,15 @@ public class Main {
                     e2.printStackTrace();
                 }
             } else if (answer == 1) {
-                while (Files.exists(server)) {
-                    Files.delete(server);
-                }
-                
+                Files.delete(server);
+
                 System.out.println("Spiel wird mit alter Version fortgesetzt");
             } else if (answer == 2) {
-                while (Files.exists(server)) {
-                    Files.delete(server);
-                }
+                Files.delete(server);
                 System.exit(0);
             }
 
         }
-        while (Files.exists(server)) {
-            Files.delete(server);
-        }
+        Files.delete(server);
     }
 }
