@@ -8,11 +8,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Container;
 import java.awt.Font;
+
 public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugefügt
         JPanel panel = new JPanel();
         JTextField jTextField1 = new javax.swing.JTextField();
         JTextField jTextField2 = new javax.swing.JTextField();
         JTextField jTextField3 = new javax.swing.JTextField();
+
         public void fuegeAllesZumMenueHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
                 GroupLayout layout = new GroupLayout(panel);
                 panel.setLayout(layout);
@@ -125,11 +127,13 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                                                                                 Short.MAX_VALUE)));
                 pane.add(panel);
         }
+
         private boolean active = true;
         static int height;
         static int weight;
         static int time;
         static boolean feldgroessekorrekt = false;
+
         private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
                 height = Integer.parseInt(jTextField1.getText());
                 weight = Integer.parseInt(jTextField2.getText());
@@ -141,6 +145,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 }
                 feldgroessekorrekt();
         }
+
         private void feldgroessekorrekt() {
                 if (feldgroessekorrekt == true) {
                         System.out.print(Farben.ANSI_GREEN + "Menü geschlossen!" + Farben.ANSI_RESET);
@@ -157,6 +162,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                                                         + Farben.ANSI_RESET);
                 }
         }
+
         public boolean isActive() {
                 if (active == true) {
                         return true;
@@ -164,6 +170,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                         return false;
                 }
         }
+
         public static int gibHoehe() {
                 if (height >= 0) {
                         return height;
@@ -172,6 +179,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                         return 0;
                 }
         }
+
         public static int gibBreite() {
                 if (weight >= 0) {
                         return weight;
@@ -180,6 +188,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                         return 0;
                 }
         }
+
         public static int gibZeit() {
                 if (time >= 0) {
                         return time;
