@@ -1,12 +1,17 @@
 package de.krapas170.memory;
 
+import java.awt.Desktop;
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -14,15 +19,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 public class Main {
 
     static Menue start = new Menue();
-
-    private final Gson gson = new Gson();
     private static HashMap<String, Object> contents;
 
     public static void main(String[] args) {
@@ -130,47 +129,43 @@ public class Main {
 
     }
 
-    public static void isTwoJsonEquals() {
-        String local = "version.json";
-        String server = "version-server.json";
+    public static void isTwoJsonEquals() throws IOException {
+        Path local = FileSystems.getDefault().getPath("version.json");
+        Path server = FileSystems.getDefault().getPath("version-server.json");
 
-        String localversion;
-        String serverversion;
+        List localList = Files.readAllLines(local);
+        List serverList = Files.readAllLines(server);
 
-        try (Reader reader = new FileReader(local)) {
+        if (localList.equals(serverList) != true) {
+            Object meldung = (String) "Anscheinend gibt es eine neuere Version des Spiels.\nSoll sie jetzt heruntergeladen werden?";
+            String uberschrift = "Neue Version verfügbar";
+            // ImageIcon icon = new ImageIcon("assets/Fehler.jpg");
+            int answer = JOptionPane.showOptionDialog(null, meldung, uberschrift, 1, 3, null,
+                    null, null);
+            System.out.println(answer);
+            if (answer == 0) {
+                Desktop d = Desktop.getDesktop();
+                try {
+                    d.browse(new URI("http://github.com/krapas170/Java-Memory/releases/tags/latest/"));
+                    try {
+                        Thread.sleep(1000);
+                        System.exit(0);
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                } catch (IOException | URISyntaxException e2) {
+                    e2.printStackTrace();
+                }
+            } else if (answer == 1) {
+                Files.delete(server);
+                System.out.println("Spiel wird mit alter Version fortgesetzt");
+            } else if (answer == 2) {
+                Files.delete(server);
+                System.exit(0);
+            }
 
-            JsonObject jsonObject = (JsonObject) JsonParser.parseReader(reader);
-
-            localversion = jsonObject.get("version").toString();
-            System.out.println(localversion);
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
-        try (Reader reader = new FileReader(server)) {
-
-
-            JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject();
-
-            serverversion = jsonObject.get("version").toString();
-            System.out.println(serverversion);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static Object get(String key) {
-        return contents.get(key);
-    }
-
-    /*
-     * Get the config-value as string to the specified key
-     * Make sure that the value is a String, else the is an Error
-     */
-    public static String getString(String key) {
-        return (String) get(key);
+        Files.delete(server);
     }
 }
