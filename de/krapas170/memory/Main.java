@@ -158,14 +158,21 @@ public class Main {
                     e2.printStackTrace();
                 }
             } else if (answer == 1) {
-                Files.delete(server);
+                while (Files.exists(server)) {
+                    Files.delete(server);
+                }
+                
                 System.out.println("Spiel wird mit alter Version fortgesetzt");
             } else if (answer == 2) {
-                Files.delete(server);
+                while (Files.exists(server)) {
+                    Files.delete(server);
+                }
                 System.exit(0);
             }
 
         }
-        Files.delete(server);
+        while (Files.exists(server)) {
+            Files.delete(server);
+        }
     }
 }
