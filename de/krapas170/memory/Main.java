@@ -116,14 +116,14 @@ public class Main {
     }
 
     public static void beiFehlerSchließen(String uberschrift, String meldung) {
-        ImageIcon icon = new ImageIcon("assets/Fehler.jpg");
+        ImageIcon icon = new ImageIcon("assets/pictures/Fehler.jpg");
         JOptionPane.showMessageDialog(null, meldung, uberschrift,
                 JOptionPane.INFORMATION_MESSAGE, icon);
         System.exit(0);
     }
 
     public static void beiFehlerFortsetzen(String uberschrift, String meldung) {
-        ImageIcon icon = new ImageIcon("assets/Fehler.jpg");
+        ImageIcon icon = new ImageIcon("assets/pictures/Fehler.jpg");
         JOptionPane.showMessageDialog(null, meldung, uberschrift,
                 JOptionPane.INFORMATION_MESSAGE, icon);
     }
