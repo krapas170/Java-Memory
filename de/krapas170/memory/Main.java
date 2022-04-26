@@ -47,7 +47,6 @@ public class Main {
                 String uberschrift = "Neue Version verfügbar";
                 int answer = JOptionPane.showOptionDialog(null, meldung, uberschrift, 1, 3, null,
                         null, null);
-                System.out.println(answer);
                 if (answer == 0) {
                     Desktop d = Desktop.getDesktop();
                     try {
@@ -70,7 +69,6 @@ public class Main {
                     System.exit(0);
                 }
             }
-            Files.delete(server);
         } catch (IOException e) {
             System.out.print(Farben.ANSI_RED + "Fehler beim Überprüfen der aktuellen Version" + Farben.ANSI_RESET);
         }
