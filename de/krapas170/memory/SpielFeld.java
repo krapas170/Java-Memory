@@ -81,6 +81,8 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     Zeitschaltung();
   }
 
+  final Timer timer = new Timer("Timer");
+
   public void Zeitschaltung() {
     TimerTask task = new TimerTask() {
       public void run() {
@@ -126,22 +128,29 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
         }
       }
     };
-    Timer timer = new Timer("Timer");
+
     long delay = 2500;
     long period = zeit1;
     timer.schedule(task, delay, period);
-    timer.cancel();
-    timer.purge();
+    if (zeit1 <= 0) {
+      timer.cancel();
+      timer.purge();
+    }
+
   }
 
   private void verloren() {
+    timer.cancel();
+    timer.purge();
     ImageIcon icon = new ImageIcon("assets/pictures/verloren.gif");
-    JOptionPane.showMessageDialog(null, "Die Zeit ist um und du hast es leider nicht geschafft!", "Zeit um",
-        JOptionPane.INFORMATION_MESSAGE, icon);
+    JOptionPane.showMessageDialog(null, "Die Zeit ist um und du hast es leider nicht geschafft!\nMöchtest du es erneut versuchen?", "Zeit um",
+        JOptionPane.YES_NO_OPTION, icon);
     System.exit(0);
   }
 
   public void gewonnen() {
+    timer.cancel();
+    timer.purge();
     int input2 = zeit1;
     zeit1 = -1;
     final double scale3600 = 1.0 / 3600;
@@ -153,9 +162,9 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     ImageIcon icon = new ImageIcon("assets/pictures/gewonnen.gif");
     JOptionPane.showMessageDialog(null,
         "Du hast alle Felder aufgedeckt und hattest noch " + format.format(mm) + ":"
-            + format.format(ss) + " übrig!",
+            + format.format(ss) + " übrig!\nWillst du nochmal spielen?",
         "Geschafft",
-        JOptionPane.INFORMATION_MESSAGE, icon);
+        JOptionPane.YES_NO_OPTION, icon);
     System.exit(0);
   }
 }
