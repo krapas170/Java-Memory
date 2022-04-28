@@ -24,14 +24,12 @@ import jaco.mp3.player.MP3Player;
 
 public class Main {
     static Menue start = new Menue();
-    private static HashMap<String, Object> contents;
-
     public static void main(String[] args) {
         String message = "Überprüfe auf Updates, bitte habe einen Moment Geduld.";
         final JDialog a = new JDialog();
         a.setTitle("Überprüfe Version");
         a.setSize(400, 150);
-        JLabel message_label = new JLabel(message.toString(), JLabel.CENTER);
+        JLabel message_label = new JLabel(message, JLabel.CENTER);
         a.add(message_label);
         a.setVisible(true);
         try (BufferedInputStream inputStream = new BufferedInputStream(
@@ -46,15 +44,15 @@ public class Main {
             Path server = FileSystems.getDefault().getPath("version-server.json");
             List localList = Files.readAllLines(local);
             List serverList = Files.readAllLines(server);
-            if (localList.equals(serverList) != true) {
-                Object meldung = (String) "Anscheinend gibt es eine neuere Version des Spiels.\nSoll sie jetzt heruntergeladen werden?";
+            if (!localList.equals(serverList)) {
+                Object meldung = "Anscheinend gibt es eine neuere Version des Spiels.\nSoll sie jetzt heruntergeladen werden?";
                 String uberschrift = "Neue Version verfügbar";
                 int answer = JOptionPane.showOptionDialog(null, meldung, uberschrift, 1, 3, null,
                         null, null);
                 if (answer == 0) {
                     Desktop d = Desktop.getDesktop();
                     try {
-                        d.browse(new URI("http://github.com/krapas170/Java-Memory/releases/tags/latest/"));
+                        d.browse(new URI("https://github.com/krapas170/Java-Memory/releases/tag/latest"));
                         try {
                             Thread.sleep(1000);
                             System.exit(0);
@@ -74,6 +72,7 @@ public class Main {
             System.out.print(Farben.ANSI_RED + "Fehler beim Überprüfen der aktuellen Version" + Farben.ANSI_RESET);
         }
         Thread tr1 = new Thread() {
+            @Override
             public void run() {
                 try {
                     Thread.sleep(2000); // <-- Wartezeit in Millisekunden
@@ -88,7 +87,6 @@ public class Main {
         } catch (InterruptedException e1) {
             e1.printStackTrace();
         }
-        boolean GameIsVisable = true;
         boolean MenueIsActive = start.isActive();
         start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         start.fuegeAllesZumMenueHinzu(start.getContentPane());
@@ -112,6 +110,7 @@ public class Main {
             }
         });
         Thread thread1 = new Thread() {
+            @Override
             public void run() {
                 int zeit1 = SpielFeld.zeit1();
                 int zeit2 = (zeit1 / 13);
@@ -126,6 +125,7 @@ public class Main {
             }
         };
         Thread thread2 = new Thread() {
+            @Override
             public void run() {
                 int zeit1 = SpielFeld.zeit1();
                 while (zeit1 >= 11) {
@@ -165,21 +165,21 @@ public class Main {
         } catch (Exception e) {
             System.err.println(e);
         }
-        if (method == "play") {
+        if ("play".equals(method)) {
             try {
                 mp3_player.play();
             } catch (Exception e) {
                 System.out.println("Error with playing sound.");
                 System.err.println(e);
             }
-        } else if (method == "stop") {
+        } else if ("stop".equals(method)) {
             try {
                 mp3_player.stop();
             } catch (Exception e) {
                 System.out.println("Error with stopping sound.");
                 System.err.println(e);
             }
-        } else if (method == "addToPlaylist") {
+        } else if ("addToPlaylist".equals(method)) {
             try {
                 mp3_player.addToPlayList(new File("assets/sound/" + url));
             } catch (Exception e) {

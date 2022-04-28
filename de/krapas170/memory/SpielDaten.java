@@ -2,15 +2,14 @@ package de.krapas170.memory;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 class SpielDaten {
 
     private char memoryfeld[][];
-    private int zzahl;
-
-    public ArrayList<Integer> vergleich = new ArrayList<>();
-    public ArrayList<Integer> arrayeins = new ArrayList<>();
-    public ArrayList<Integer> arrayzwei = new ArrayList<>();
+    public List<Integer> vergleich = new ArrayList<>();
+    public List<Integer> arrayeins = new ArrayList<>();
+    public List<Integer> arrayzwei = new ArrayList<>();
 
     public SpielDaten(int xgroesse, int ygroesse) {
 
