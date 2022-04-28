@@ -2,6 +2,7 @@ package de.krapas170.memory;
 
 import java.awt.Desktop;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
@@ -12,11 +13,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import jaco.mp3.player.MP3Player;
 
 public class Main {
     static Menue start = new Menue();
@@ -55,7 +59,6 @@ public class Main {
                             Thread.sleep(1000);
                             System.exit(0);
                         } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
                     } catch (IOException | URISyntaxException e2) {
@@ -83,7 +86,6 @@ public class Main {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
         boolean GameIsVisable = true;
@@ -109,6 +111,37 @@ public class Main {
                 gitter.setVisible(true);
             }
         });
+        Thread thread1 = new Thread() {
+            public void run() {
+                int zeit1 = SpielFeld.zeit1();
+                int zeit2 = (zeit1 / 13);
+                for (int index = 0; index < zeit2; index++) {
+                    Main.playSound("timer.mp3", "play");
+                    try {
+                        Thread.sleep(13000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        Thread thread2 = new Thread() {
+            public void run() {
+                int zeit1 = SpielFeld.zeit1();
+                while (zeit1 >= 11) {
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    zeit1 = SpielFeld.zeit1();
+                }
+                Main.playSound(null, "stop");
+                Main.playSound("countdown-end.mp3", "play");
+            }
+        };
+        thread1.start();
+        thread2.start();
     }
 
     public static void beiFehlerSchließen(String uberschrift, String meldung) {
@@ -122,5 +155,39 @@ public class Main {
         ImageIcon icon = new ImageIcon("assets/pictures/Fehler.jpg");
         JOptionPane.showMessageDialog(null, meldung, uberschrift,
                 JOptionPane.INFORMATION_MESSAGE, icon);
+    }
+
+    static MP3Player mp3_player;
+
+    public static void playSound(String url, String method) {
+        try {
+            mp3_player = new MP3Player(new File("assets/sound/" + url));
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        if (method == "play") {
+            try {
+                mp3_player.play();
+            } catch (Exception e) {
+                System.out.println("Error with playing sound.");
+                System.err.println(e);
+            }
+        } else if (method == "stop") {
+            try {
+                mp3_player.stop();
+            } catch (Exception e) {
+                System.out.println("Error with stopping sound.");
+                System.err.println(e);
+            }
+        } else if (method == "addToPlaylist") {
+            try {
+                mp3_player.addToPlayList(new File("assets/sound/" + url));
+            } catch (Exception e) {
+                System.out.println("Error with adding sound to playlist.");
+                System.err.println(e);
+            }
+        } else {
+            System.out.println("Error: No sound method");
+        }
     }
 }

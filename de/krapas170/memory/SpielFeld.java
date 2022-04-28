@@ -17,9 +17,10 @@ import javax.swing.JPanel;
 public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinzugefügt
   SpielSteuerung dieSpielSteuerung;
   int xgroesse = Menue.gibBreite();
+
   int ygroesse = Menue.gibHoehe();
-  int zeit = Menue.gibZeit();
-  int zeit1 = zeit * 60;
+  static int zeit = Menue.gibZeit();
+  static int zeit1 = zeit * 60;
   public Knopf knoepfe[][] = new Knopf[xgroesse][ygroesse];
   GridLayout gitterLayout = new GridLayout(0, xgroesse);
   JPanel panel = new JPanel();
@@ -100,13 +101,12 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
         }
         System.out.println("Verbleibende Sekunden: " + zeit1 + Farben.ANSI_RESET);
         anzeige.setEnabled(false);
-        anzeige.setText("Verbleibend:");
+        anzeige.setText("Zeit:");
         zeitAnzeige.setEnabled(false);
         ZeitText();
         try {
           Thread.sleep(1000);
         } catch (InterruptedException e) {
-          // TODO Auto-generated catch block
           e.printStackTrace();
         }
         if (zeit1 == 0) {
@@ -128,22 +128,22 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
         }
       }
     };
-
-    long delay = 2500;
+    long delay = 0;
     long period = zeit1;
     timer.schedule(task, delay, period);
     if (zeit1 <= 0) {
       timer.cancel();
       timer.purge();
     }
-
   }
 
   private void verloren() {
     timer.cancel();
     timer.purge();
+    Main.playSound("verloren.mp3", "play");
     ImageIcon icon = new ImageIcon("assets/pictures/verloren.gif");
-    JOptionPane.showMessageDialog(null, "Die Zeit ist um und du hast es leider nicht geschafft!\nMöchtest du es erneut versuchen?", "Zeit um",
+    JOptionPane.showMessageDialog(null,
+        "Die Zeit ist um und du hast es leider nicht geschafft!\nMöchtest du es erneut versuchen?", "Zeit um",
         JOptionPane.YES_NO_OPTION, icon);
     System.exit(0);
   }
@@ -160,11 +160,17 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     int ss = input2 - mm * 60 - hh * 3600;
     DecimalFormat format = new DecimalFormat("00");
     ImageIcon icon = new ImageIcon("assets/pictures/gewonnen.gif");
+    Main.playSound("gewonnen.mp3", "play");
     JOptionPane.showMessageDialog(null,
         "Du hast alle Felder aufgedeckt und hattest noch " + format.format(mm) + ":"
             + format.format(ss) + " übrig!\nWillst du nochmal spielen?",
         "Geschafft",
         JOptionPane.YES_NO_OPTION, icon);
     System.exit(0);
+  }
+
+  public static int zeit1() {
+    return zeit1;
+
   }
 }
