@@ -20,13 +20,13 @@ public class MP3Player extends JPanel
     public static final String UI_CLASS_ID;
     private final Random a;
     private List b;
-    List c;
-    int d;
+    private List c;
+    private int d;
     private boolean e;
     private boolean f;
-    volatile boolean g;
+    private volatile boolean g;
     private volatile boolean h;
-    volatile boolean i;
+    private volatile boolean i;
     
     static {
         UI_CLASS_ID = String.valueOf(MP3Player.class.getName()) + "UI";
@@ -118,7 +118,7 @@ public class MP3Player extends JPanel
         this.a();
     }
     
-    void a(MP3Player a2, boolean j) {
+    private void a() {
         this.g = false;
         this.i = true;
         while (this.i && !this.h) {

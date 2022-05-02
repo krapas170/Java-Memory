@@ -15,7 +15,7 @@ final class c implements Icon
 {
     private BufferedImage a;
     
-    private c(final BufferedImage a, final int i) {
+    private c(final BufferedImage a, final byte b) {
         this.a = a;
     }
     
