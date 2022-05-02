@@ -109,38 +109,19 @@ public class Main {
                 gitter.setVisible(true);
             }
         });
-        Thread thread1 = new Thread() {
-            @Override
-            public void run() {
-                int zeit1 = SpielFeld.zeit1();
-                int zeit2 = (zeit1 / 13);
-                for (int index = 0; index < zeit2; index++) {
-                    Main.playTimer();
-                    try {
-                        Thread.sleep(13000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+        Main.playTimer();
+        int zeit1 = SpielFeld.zeit1();
+        while (zeit1 >= 11) {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        };
-        Thread thread2 = new Thread() {
-            @Override
-            public void run() {
-                int zeit1 = SpielFeld.zeit1();
-                while (zeit1 >= 11) {
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    zeit1 = SpielFeld.zeit1();
-                }
-                Main.playCountdownEnd();
-            }
-        };
-        thread1.start();
-        thread2.start();
+            zeit1 = SpielFeld.zeit1();
+        }
+        if (zeit1 >= 1) {
+            Main.playCountdownEnd();
+        }
     }
 
     public static void beiFehlerSchließen(String uberschrift, String meldung) {
