@@ -115,7 +115,7 @@ public class Main {
                 int zeit1 = SpielFeld.zeit1();
                 int zeit2 = (zeit1 / 13);
                 for (int index = 0; index < zeit2; index++) {
-                    Main.playSound("timer.mp3", "play");
+                    Main.playTimer();
                     try {
                         Thread.sleep(13000);
                     } catch (InterruptedException e) {
@@ -136,8 +136,7 @@ public class Main {
                     }
                     zeit1 = SpielFeld.zeit1();
                 }
-                Main.playSound(null, "stop");
-                Main.playSound("countdown-end.mp3", "play");
+                Main.playCountdownEnd();
             }
         };
         thread1.start();
@@ -157,38 +156,39 @@ public class Main {
                 JOptionPane.INFORMATION_MESSAGE, icon);
     }
 
-    static MP3Player mp3_player;
+    static String url;
+    static MP3Player mp3_player = new MP3Player();
 
-    public static void playSound(String url, String method) {
-        try {
-            mp3_player = new MP3Player(new File("assets/sound/" + url));
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-        if ("play".equals(method)) {
-            try {
-                mp3_player.play();
-            } catch (Exception e) {
-                System.out.println("Error with playing sound.");
-                System.err.println(e);
-            }
-        } else if ("stop".equals(method)) {
-            try {
-                mp3_player.stop();
-            } catch (Exception e) {
-                System.out.println("Error with stopping sound.");
-                System.err.println(e);
-            }
-        } else if ("addToPlaylist".equals(method)) {
-            try {
-                mp3_player.addToPlayList(new File("assets/sound/" + url));
-            } catch (Exception e) {
-                System.out.println("Error with adding sound to playlist.");
-                System.err.println(e);
-            }
-        } else {
-            System.out.println("Error: No sound method");
-        }
+    public static void playTimer() {
+        mp3_player.stop();
+        mp3_player.getPlayList().clear();
+        mp3_player.addToPlayList(new File("assets/sound/timer.mp3"));
+        mp3_player.play();
+        mp3_player.setRepeat(true);
+    }
+
+    public static void playCountdownEnd() {
+        mp3_player.stop();
+        mp3_player.setRepeat(false);
+        mp3_player.getPlayList().clear();
+        mp3_player.addToPlayList(new File("assets/sound/countdown-end.mp3"));
+        mp3_player.play();
+    }
+
+    public static void playGewonnen() {
+        mp3_player.stop();
+        mp3_player.setRepeat(false);
+        mp3_player.getPlayList().clear();
+        mp3_player.addToPlayList(new File("assets/sound/gewonnen.mp3"));
+        mp3_player.play();
+    }
+
+    public static void playVerloren() {
+        mp3_player.stop();
+        mp3_player.setRepeat(false);
+        mp3_player.getPlayList().clear();
+        mp3_player.addToPlayList(new File("assets/sound/verloren.mp3"));
+        mp3_player.play();
     }
 
     static int Hoehe;
