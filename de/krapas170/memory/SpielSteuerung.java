@@ -6,9 +6,9 @@ public class SpielSteuerung {
 
     private SpielDaten dieSpielDaten;
     private SpielFeld dasSpielFeld;
-    int xgroesse = Menue.gibBreite();
-    int ygroesse = Menue.gibHoehe();
-    int zeit = Menue.gibZeit();
+    int xgroesse = Main.gibBreite();
+    int ygroesse = Main.gibHoehe();
+    int zeit = Main.gibZeit();
     private int anzahlLinksKlicks = 0;
     private int anzahlrichtige = 0;
 
