@@ -159,7 +159,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                                 System.out.print(Farben.ANSI_GREEN + "Menü geschlossen!" + Farben.ANSI_RESET);
                                 active = false;
                                 setVisible(false);
-                                // Main.setzeEinstellungen(height, weight, time);
+                                Main.setzeEinstellungen(height, weight, time);
                         }
                 }
         }
