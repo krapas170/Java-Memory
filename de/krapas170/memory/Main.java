@@ -23,6 +23,7 @@ import jaco.mp3.player.MP3Player;
 
 public class Main {
     static Menue start = new Menue();
+
     public static void main(String[] args) {
         String message = "Überprüfe auf Updates, bitte habe einen Moment Geduld.";
         final JDialog a = new JDialog();
