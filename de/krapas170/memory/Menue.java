@@ -30,7 +30,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 jLabel1.setFont(new Font("Arial", Font.BOLD, 21));
                 jLabel2.setText("Sicherlich kennst du bereits die Regeln von dem Spiel");
                 jLabel3.setText("Zum Einstellen des Spiels gib bitte unten die Anzahl der Felder");
-                jLabel4.setText("und die Zeit ein. Maximale Anzahl der Felder ist 104.");
+                jLabel4.setText("und die Zeit ein. Maximale Anzahl der Felder ist 52.");
                 jLabel5.setText("Höhe:");
                 jLabel6.setText("Breite:");
                 jLabel7.setText("Zeitlimit in Minuten:");
@@ -139,11 +139,15 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 weight = Integer.parseInt(jTextField2.getText());
                 time = Integer.parseInt(jTextField3.getText());
                 if (height * weight % 2 == 0) {
-                        feldgroessekorrekt = true;
+                        if (height * weight <= 52) {
+                                feldgroessekorrekt = true;
+                        }
+
                 } else {
                         feldgroessekorrekt = false;
                 }
                 feldgroessekorrekt();
+
         }
 
         private void feldgroessekorrekt() {
@@ -153,13 +157,24 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                         setVisible(false);
                         // Main.setzeEinstellungen(height, weight, time);
                 } else {
-                        String uberschrift = "Falsche Breite oder Höhe";
-                        String meldung = "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!";
-                        Main.beiFehlerFortsetzen(uberschrift, meldung);
-                        System.out.println(
-                                        Farben.ANSI_RED_BACKGROUND + Farben.ANSI_WHITE
-                                                        + "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!"
-                                                        + Farben.ANSI_RESET);
+                        if (height * weight % 2 == 1) {
+                                String uberschrift = "Ungültige Feldgröße";
+                                String meldung = "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!";
+                                Main.beiFehlerFortsetzen(uberschrift, meldung);
+                                System.out.println(
+                                                Farben.ANSI_RED_BACKGROUND + Farben.ANSI_WHITE
+                                                                + "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!"
+                                                                + Farben.ANSI_RESET);
+                        }
+                        if (height * weight <= 52) {
+                                String uberschrift = "Zu viele Felder";
+                                String meldung = "Bitte stelle sicher, dass es nicht mehr als 52 Felder gibt!";
+                                Main.beiFehlerFortsetzen(uberschrift, meldung);
+                                System.out.println(
+                                                Farben.ANSI_RED_BACKGROUND + Farben.ANSI_WHITE
+                                                                + "Bitte stelle sicher, dass es nicht mehr als 52 Felder gibt!"
+                                                                + Farben.ANSI_RESET);
+                        }
                 }
         }
 
