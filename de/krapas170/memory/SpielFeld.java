@@ -16,10 +16,9 @@ import javax.swing.JPanel;
 
 public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinzugefügt
   SpielSteuerung dieSpielSteuerung;
-  int xgroesse = Menue.gibBreite();
-
-  int ygroesse = Menue.gibHoehe();
-  static int zeit = Menue.gibZeit();
+  static int xgroesse = Main.gibBreite();
+  static int ygroesse = Main.gibHoehe();
+  static int zeit = Main.gibZeit();
   static int zeit1 = zeit * 60;
   public Knopf knoepfe[][] = new Knopf[xgroesse][ygroesse];
   GridLayout gitterLayout = new GridLayout(0, xgroesse);
@@ -31,7 +30,15 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
 
   public void reload() {
     this.setVisible(false);
-    Main.main(null);
+    javax.swing.SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        SpielFeld gitter = new SpielFeld();
+        gitter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gitter.fuegeAllesZurOberflaecheHinzu(gitter.getContentPane());
+        gitter.pack();
+        gitter.setVisible(true);
+      }
+    });
   }
 
   public void exit() {
@@ -40,9 +47,6 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
 
   public void fuegeAllesZurOberflaecheHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
     panel.setLayout(gitterLayout);
-    xgroesse = Menue.gibBreite();
-    ygroesse = Menue.gibHoehe();
-    zeit = Menue.gibZeit();
     for (int cx = 0; cx < xgroesse; cx++) {
       for (int cy = 0; cy < ygroesse; cy++) {
         // erzeuge Button
@@ -63,6 +67,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     // fuege die Textanzeige hinzu
     panel.add(neustart);
     neustart.addActionListener(new ActionListener() {
+
       @Override
       public void actionPerformed(java.awt.event.ActionEvent e) {
         reload();
