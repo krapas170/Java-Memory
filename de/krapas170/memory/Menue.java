@@ -170,32 +170,5 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 } else {
                         return false;
                 }
-        }
-
-        public static int gibHoehe() {
-                if (height >= 0) {
-                        return height;
-                } else {
-                        System.out.println("Die Höhe hat keinen oder einen negativen Wert");
-                        return 0;
-                }
-        }
-
-        public static int gibBreite() {
-                if (weight >= 0) {
-                        return weight;
-                } else {
-                        System.out.println("Die Breite hat keinen oder einen negativen Wert");
-                        return 0;
-                }
-        }
-
-        public static int gibZeit() {
-                if (time >= 0) {
-                        return time;
-                } else {
-                        System.out.println("Die Zeit hat keinen oder einen negativen Wert");
-                        return 0;
-                }
-        }
+        }      
 }
