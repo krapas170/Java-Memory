@@ -190,4 +190,7 @@ public class Main {
             System.out.println("Error: No sound method");
         }
     }
+
+    public static void setzeEinstellungen(int height, int weight, int time) {
+    }
 }
