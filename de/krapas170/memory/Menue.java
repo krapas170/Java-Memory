@@ -138,42 +138,28 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 height = Integer.parseInt(jTextField1.getText());
                 weight = Integer.parseInt(jTextField2.getText());
                 time = Integer.parseInt(jTextField3.getText());
-                if (height * weight % 2 == 0) {
+                if ((height * weight) % 2 == 1) {
+                        String uberschrift = "Ungültige Feldgröße";
+                        String meldung = "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!";
+                        System.out.println(
+                                        Farben.ANSI_RED_BACKGROUND + Farben.ANSI_WHITE
+                                                        + "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!"
+                                                        + Farben.ANSI_RESET);
+                        Main.beiFehlerFortsetzen(uberschrift, meldung);
+                } else if (height * weight >= 53) {
+                        String uberschrift = "Zu viele Felder";
+                        String meldung = "Bitte stelle sicher, dass es nicht mehr als 52 Felder gibt!";
+                        System.out.println(
+                                        Farben.ANSI_RED_BACKGROUND + Farben.ANSI_WHITE
+                                                        + "Bitte stelle sicher, dass es nicht mehr als 52 Felder gibt!"
+                                                        + Farben.ANSI_RESET);
+                        Main.beiFehlerFortsetzen(uberschrift, meldung);
+                } else if ((height * weight) % 2 == 0) {
                         if (height * weight <= 52) {
-                                feldgroessekorrekt = true;
-                        }
-
-                } else {
-                        feldgroessekorrekt = false;
-                }
-                feldgroessekorrekt();
-
-        }
-
-        private void feldgroessekorrekt() {
-                if (feldgroessekorrekt == true) {
-                        System.out.print(Farben.ANSI_GREEN + "Menü geschlossen!" + Farben.ANSI_RESET);
-                        active = false;
-                        setVisible(false);
-                        // Main.setzeEinstellungen(height, weight, time);
-                } else {
-                        if (height * weight % 2 == 1) {
-                                String uberschrift = "Ungültige Feldgröße";
-                                String meldung = "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!";
-                                Main.beiFehlerFortsetzen(uberschrift, meldung);
-                                System.out.println(
-                                                Farben.ANSI_RED_BACKGROUND + Farben.ANSI_WHITE
-                                                                + "Bitte stelle sicher, dass entweder die Höhe oder die Breite eine gerade Zahl ist!"
-                                                                + Farben.ANSI_RESET);
-                        }
-                        if (height * weight <= 52) {
-                                String uberschrift = "Zu viele Felder";
-                                String meldung = "Bitte stelle sicher, dass es nicht mehr als 52 Felder gibt!";
-                                Main.beiFehlerFortsetzen(uberschrift, meldung);
-                                System.out.println(
-                                                Farben.ANSI_RED_BACKGROUND + Farben.ANSI_WHITE
-                                                                + "Bitte stelle sicher, dass es nicht mehr als 52 Felder gibt!"
-                                                                + Farben.ANSI_RESET);
+                                System.out.print(Farben.ANSI_GREEN + "Menü geschlossen!" + Farben.ANSI_RESET);
+                                active = false;
+                                setVisible(false);
+                                // Main.setzeEinstellungen(height, weight, time);
                         }
                 }
         }
