@@ -149,7 +149,6 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   private void verloren() {
     timer.cancel();
     timer.purge();
-    Main.mp3_player.stop();
     Main.playVerloren();
     ImageIcon icon = new ImageIcon("assets/pictures/verloren.gif");
     JOptionPane.showMessageDialog(null,
@@ -159,7 +158,6 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   }
 
   public void gewonnen() {
-    Main.mp3_player.stop();
     timer.cancel();
     timer.purge();
     int input2 = zeit1;
