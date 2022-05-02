@@ -29,6 +29,8 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   JButton beenden = new JButton("Beenden");
 
   public void reload() {
+    timer.cancel();
+    timer.purge();
     this.setVisible(false);
     javax.swing.SwingUtilities.invokeLater(new Runnable() {
       public void run() {
@@ -46,6 +48,8 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   }
 
   public void fuegeAllesZurOberflaecheHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
+    zeit = Main.gibZeit();
+    zeit1 = zeit * 60;
     panel.setLayout(gitterLayout);
     for (int cx = 0; cx < xgroesse; cx++) {
       for (int cy = 0; cy < ygroesse; cy++) {
@@ -94,7 +98,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
       public void run() {
         zeit1--;
         if (zeit1 <= 10) {
-          if (zeit1 >= 0) {
+          if (zeit1 >= 1) {
             if (zeit1 % 2 == 0) {
               System.out.print(Farben.ANSI_RED_BACKGROUND + Farben.ANSI_WHITE);
               zeitAnzeige.setBackground(Color.RED);
@@ -145,7 +149,8 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   private void verloren() {
     timer.cancel();
     timer.purge();
-    Main.playSound("verloren.mp3", "play");
+    Main.mp3_player.stop();
+    Main.playVerloren();
     ImageIcon icon = new ImageIcon("assets/pictures/verloren.gif");
     JOptionPane.showMessageDialog(null,
         "Die Zeit ist um und du hast es leider nicht geschafft!\nMöchtest du es erneut versuchen?", "Zeit um",
@@ -154,6 +159,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   }
 
   public void gewonnen() {
+    Main.mp3_player.stop();
     timer.cancel();
     timer.purge();
     int input2 = zeit1;
@@ -165,7 +171,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     int ss = input2 - mm * 60 - hh * 3600;
     DecimalFormat format = new DecimalFormat("00");
     ImageIcon icon = new ImageIcon("assets/pictures/gewonnen.gif");
-    Main.playSound("gewonnen.mp3", "play");
+    Main.playGewonnen();
     JOptionPane.showMessageDialog(null,
         "Du hast alle Felder aufgedeckt und hattest noch " + format.format(mm) + ":"
             + format.format(ss) + " übrig!\nWillst du nochmal spielen?",
