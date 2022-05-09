@@ -43,6 +43,8 @@ public class Main {
                     Desktop d = Desktop.getDesktop();
                     try {
                         d.browse(new URI(
+                                "https://github.com/krapas170/Java-Memory/releases/tag/latest"));
+                        d.browse(new URI(
                                 "https://github.com/krapas170/Java-Memory/releases/download/latest/java-memory-installer.exe"));
                         try {
                             Thread.sleep(1000);
@@ -214,7 +216,6 @@ public class Main {
         String result = stringBuilder.toString().trim();
         JSONObject obj = new JSONObject(result);
         String version = obj.getString("version");
-        System.out.println(version);
         return version;
     }
 
@@ -230,7 +231,6 @@ public class Main {
         String result = stringBuilder.toString().trim();
         JSONObject obj = new JSONObject(result);
         String version = obj.getString("version");
-        System.out.println(version);
         return version;
     }
 }
