@@ -1,17 +1,14 @@
 package de.krapas170.memory;
 
 import java.awt.Desktop;
-import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -19,12 +16,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import org.json.JSONObject;
+
 import jaco.mp3.player.MP3Player;
 
 public class Main {
     static Menue start = new Menue();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String message = "Überprüfe auf Updates, bitte habe einen Moment Geduld.";
         final JDialog a = new JDialog();
         a.setTitle("Überprüfe Version");
@@ -32,19 +31,10 @@ public class Main {
         JLabel message_label = new JLabel(message, JLabel.CENTER);
         a.add(message_label);
         a.setVisible(true);
-        try (BufferedInputStream inputStream = new BufferedInputStream(
-                new URL("https://raw.githubusercontent.com/krapas170/Java-Memory/main/version.json").openStream());
-                FileOutputStream fileOS = new FileOutputStream("version-server.json")) {
-            byte data[] = new byte[1024];
-            int byteContent;
-            while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
-                fileOS.write(data, 0, byteContent);
-            }
-            Path local = FileSystems.getDefault().getPath("version.json");
-            Path server = FileSystems.getDefault().getPath("version-server.json");
-            List localList = Files.readAllLines(local);
-            List serverList = Files.readAllLines(server);
-            if (!localList.equals(serverList)) {
+        try {
+            String versionServer = readServerVersion();
+            String versionLocal = readLocalVersion();
+            if (!versionServer.equals(versionLocal)) {
                 Object meldung = "Anscheinend gibt es eine neuere Version des Spiels.\nSoll sie jetzt heruntergeladen werden?";
                 String uberschrift = "Neue Version verfügbar";
                 int answer = JOptionPane.showOptionDialog(null, meldung, uberschrift, 1, 3, null,
@@ -52,7 +42,8 @@ public class Main {
                 if (answer == 0) {
                     Desktop d = Desktop.getDesktop();
                     try {
-                        d.browse(new URI("https://github.com/krapas170/Java-Memory/releases/tag/latest"));
+                        d.browse(new URI(
+                                "https://github.com/krapas170/Java-Memory/releases/download/latest/java-memory-installer.exe"));
                         try {
                             Thread.sleep(1000);
                             System.exit(0);
@@ -68,7 +59,7 @@ public class Main {
                     System.exit(0);
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.print(Farben.ANSI_RED + "Fehler beim Überprüfen der aktuellen Version" + Farben.ANSI_RESET);
         }
         Thread tr1 = new Thread() {
@@ -207,5 +198,39 @@ public class Main {
             System.out.println("Die Zeit hat keinen oder einen negativen Wert");
             return 0;
         }
+    }
+
+    private static String readServerVersion() throws IOException {
+        String URL = "https://raw.githubusercontent.com/krapas170/Java-Memory/main/version.json";
+        URL url = new URL(URL);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
+        StringBuilder stringBuilder = new StringBuilder();
+        String inputLine;
+        while ((inputLine = bufferedReader.readLine()) != null) {
+            stringBuilder.append(inputLine);
+            stringBuilder.append(System.lineSeparator());
+        }
+        bufferedReader.close();
+        String result = stringBuilder.toString().trim();
+        JSONObject obj = new JSONObject(result);
+        String version = obj.getString("version");
+        System.out.println(version);
+        return version;
+    }
+
+    private static String readLocalVersion() throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader("version.json"));
+        StringBuilder stringBuilder = new StringBuilder();
+        String inputLine;
+        while ((inputLine = bufferedReader.readLine()) != null) {
+            stringBuilder.append(inputLine);
+            stringBuilder.append(System.lineSeparator());
+        }
+        bufferedReader.close();
+        String result = stringBuilder.toString().trim();
+        JSONObject obj = new JSONObject(result);
+        String version = obj.getString("version");
+        System.out.println(version);
+        return version;
     }
 }
