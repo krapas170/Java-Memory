@@ -170,5 +170,5 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 } else {
                         return false;
                 }
-        }      
+        }
 }
