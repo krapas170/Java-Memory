@@ -113,7 +113,7 @@ public class SpielSteuerung {
             String meldung = "Fehler im Array 'vergleich'! Beende das Spiel!";
             Main.beiFehlerSchließen(uberschrift, meldung);
         }
-        if (anzahlrichtige == xgroesse*ygroesse) {
+        if (anzahlrichtige == xgroesse * ygroesse) {
             dasSpielFeld.gewonnen();
         }
     }
