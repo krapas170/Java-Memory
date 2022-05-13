@@ -43,9 +43,9 @@ public class Main {
                     Desktop d = Desktop.getDesktop();
                     try {
                         d.browse(new URI(
-                                "https://github.com/krapas170/Java-Memory/releases/tag/latest"));
+                                "https://github.com/krapas170/Java-Memory/releases/latest"));
                         d.browse(new URI(
-                                "https://github.com/krapas170/Java-Memory/releases/download/latest/java-memory-installer.exe"));
+                                "https://github.com/krapas170/Java-Memory/releases/latest/download/java-memory-installer.exe"));
                         try {
                             Thread.sleep(1000);
                             System.exit(0);
