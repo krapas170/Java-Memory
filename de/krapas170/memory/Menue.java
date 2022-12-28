@@ -15,7 +15,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
         JTextField jTextField2 = new javax.swing.JTextField();
         JTextField jTextField3 = new javax.swing.JTextField();
 
-        public void fuegeAllesZumMenueHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
+        protected void fuegeAllesZumMenueHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
                 GroupLayout layout = new GroupLayout(panel);
                 panel.setLayout(layout);
                 JLabel jLabel1 = new javax.swing.JLabel();
@@ -128,7 +128,7 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 pane.add(panel);
         }
 
-        private boolean active = true;
+        protected static boolean active = true;
         static int height;
         static int weight;
         static int time;
@@ -157,8 +157,8 @@ public class Menue extends JFrame { // dem Spielfeld werden die Objekte hinzugef
                 } else if ((height * weight) % 2 == 0) {
                         if (height * weight <= 52) {
                                 System.out.print(Farben.ANSI_GREEN + "Menü geschlossen!" + Farben.ANSI_RESET);
-                                active = false;
                                 setVisible(false);
+                                active = false;
                                 Main.setzeEinstellungen(height, weight, time);
                         }
                 }
