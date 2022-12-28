@@ -25,7 +25,7 @@ public class SpielSteuerung {
 
     }
 
-    public void linksKlick(int px, int py) {
+    protected void linksKlick(int px, int py) {
 
         anzahlLinksKlicks++;
 
@@ -141,24 +141,24 @@ public class SpielSteuerung {
         anzahlLinksKlicks = 0;
     }
 
-    public void rechtsKlick(int px, int py) {
+    private void rechtsKlick(int px, int py) {
 
         dasSpielFeld.knoepfe[px][py].setText("     ");
         dasSpielFeld.knoepfe[px][py].setEnabled(true);
         anzahlLinksKlicks = 0;
     }
 
-    public void setzeFeldWert(int px, int py) {
+    private void setzeFeldWert(int px, int py) {
         char wert = dieSpielDaten.gibFeldWert(px, py);
         dasSpielFeld.knoepfe[px][py].setText("" + wert);
     }
 
-    public void sperreFeld(int px, int py) {
+    protected void sperreFeld(int px, int py) {
         dasSpielFeld.knoepfe[px][py].setEnabled(false);
         dasSpielFeld.knoepfe[px][py].removeActionListener(null);
     }
 
-    public void gebeFeldfrei(int px, int py) {
+    private void gebeFeldfrei(int px, int py) {
         dasSpielFeld.knoepfe[px][py].setEnabled(true);
         dasSpielFeld.knoepfe[px][py].addActionListener(null);
     }
