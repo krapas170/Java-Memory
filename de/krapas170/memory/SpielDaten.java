@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class SpielDaten {
+public class SpielDaten {
 
     private char memoryfeld[][];
-    public List<Integer> vergleich = new ArrayList<>();
-    public List<Integer> arrayeins = new ArrayList<>();
-    public List<Integer> arrayzwei = new ArrayList<>();
+    protected List<Integer> vergleich = new ArrayList<>();
+    protected List<Integer> arrayeins = new ArrayList<>();
+    protected List<Integer> arrayzwei = new ArrayList<>();
 
-    public SpielDaten(int xgroesse, int ygroesse) {
+    protected SpielDaten(int xgroesse, int ygroesse) {
 
         memoryfeld = new char[xgroesse][ygroesse];
         ArrayList<Integer> BuchstabenListe = new ArrayList<>();
-
 
         for (int idx = 0; idx < xgroesse; idx++) {
             for (int idy = 0; idy < ygroesse; idy++) {
@@ -34,7 +33,7 @@ class SpielDaten {
 
     }
 
-    public char gibFeldWert(int px, int py) {
+    protected char gibFeldWert(int px, int py) {
         return memoryfeld[px][py];
     }
 
