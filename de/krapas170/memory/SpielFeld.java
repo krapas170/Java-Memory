@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,7 +23,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   static int ygroesse = Main.gibHoehe();
   static int zeit = Main.gibZeit();
   static int zeit1 = zeit * 60;
-  public Knopf knoepfe[][] = new Knopf[xgroesse][ygroesse];
+  protected Knopf knoepfe[][] = new Knopf[xgroesse][ygroesse];
   GridLayout gitterLayout = new GridLayout(0, xgroesse);
   JPanel panel = new JPanel();
   JButton anzeige = new JButton();
@@ -28,7 +31,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
   JButton neustart = new JButton("Neustart");
   JButton beenden = new JButton("Beenden");
 
-  public void reload() {
+  private void reload() {
     timer.cancel();
     timer.purge();
     this.setVisible(false);
@@ -43,11 +46,66 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     });
   }
 
-  public void exit() {
+  private void reloadMenue() {
+    timer.cancel();
+    timer.purge();
+    this.setVisible(false);
+    Menue start = new Menue();
+    start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    start.fuegeAllesZumMenueHinzu(start.getContentPane());
+    start.pack();
+    start.setVisible(true);
+    while (Menue.active) {
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+    javax.swing.SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        SpielFeld gitter = new SpielFeld();
+        gitter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gitter.fuegeAllesZurOberflaecheHinzu(gitter.getContentPane());
+        gitter.pack();
+        gitter.setVisible(true);
+      }
+    });
+    Main.playTimer();
+    int zeit1 = SpielFeld.zeit1();
+    while (zeit1 >= 11) {
+      try {
+        Thread.sleep(200);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      zeit1 = SpielFeld.zeit1();
+    }
+    if (zeit1 >= 1) {
+      Main.playCountdownEnd();
+    }
+    /*
+     * Main.startMenue();
+     * 
+     * while (Main.isMenueActive()) {
+     * try {
+     * Thread.sleep(100);
+     * Main.isMenueActive();
+     * } catch (InterruptedException e) {
+     * e.printStackTrace();
+     * }
+     * }
+     * 
+     * Main.startSpielFeld();
+     * Main.startTimer();
+     */
+  }
+
+  private void exit() {
     System.exit(0);
   }
 
-  public void fuegeAllesZurOberflaecheHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
+  protected void fuegeAllesZurOberflaecheHinzu(final Container pane) { // fügt alles zur Oberfläche hinzu
     zeit = Main.gibZeit();
     zeit1 = zeit * 60;
     panel.setLayout(gitterLayout);
@@ -93,7 +151,7 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
 
   final Timer timer = new Timer("Timer");
 
-  public void Zeitschaltung() {
+  private void Zeitschaltung() {
     TimerTask task = new TimerTask() {
       public void run() {
         zeit1--;
@@ -151,13 +209,21 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     timer.purge();
     Main.playVerloren();
     ImageIcon icon = new ImageIcon("assets/pictures/verloren.gif");
-    JOptionPane.showMessageDialog(null,
-        "Die Zeit ist um und du hast es leider nicht geschafft!\nMöchtest du es erneut versuchen?", "Zeit um",
-        JOptionPane.YES_NO_OPTION, icon);
-    System.exit(0);
+    String[] options = { "Ja", "Nein", "Werte ändern" };
+    int answer = JOptionPane.showOptionDialog(null,
+        "Die Zeit ist um und du hast es leider nicht geschafft!\nMöchtest du es erneut versuchen?", "Zeit um", 1, 3,
+        icon,
+        options, null);
+    if (answer == 0) {
+      reload();
+    } else if (answer == 1) {
+      System.exit(0);
+    } else if (answer == 2) {
+      reloadMenue();
+    }
   }
 
-  public void gewonnen() {
+  protected void gewonnen() {
     timer.cancel();
     timer.purge();
     int input2 = zeit1;
@@ -170,15 +236,22 @@ public class SpielFeld extends JFrame { // dem Spielfeld werden die Objekte hinz
     DecimalFormat format = new DecimalFormat("00");
     ImageIcon icon = new ImageIcon("assets/pictures/gewonnen.gif");
     Main.playGewonnen();
-    JOptionPane.showMessageDialog(null,
+    String[] options = { "Ja", "Nein", "Werte ändern" };
+    int answer = JOptionPane.showOptionDialog(null,
         "Du hast alle Felder aufgedeckt und hattest noch " + format.format(mm) + ":"
             + format.format(ss) + " übrig!\nWillst du nochmal spielen?",
-        "Geschafft",
-        JOptionPane.YES_NO_OPTION, icon);
-    System.exit(0);
+        "Geschafft", 1, 3, icon,
+        options, null);
+    if (answer == 0) {
+      reload();
+    } else if (answer == 1) {
+      System.exit(0);
+    } else if (answer == 2) {
+      reloadMenue();
+    }
   }
 
-  public static int zeit1() {
+  protected static int zeit1() {
     return zeit1;
 
   }
