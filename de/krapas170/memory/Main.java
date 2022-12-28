@@ -68,7 +68,7 @@ public class Main {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2000); // <-- Wartezeit in Millisekunden
+                    Thread.sleep(1000); // <-- Wartezeit in Millisekunden
                     a.dispose();
                 } catch (InterruptedException ex) {
                 }
@@ -76,7 +76,7 @@ public class Main {
         };
         tr1.start();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e1) {
             e1.printStackTrace();
         }
@@ -117,14 +117,19 @@ public class Main {
         }
     }
 
-    public static void beiFehlerSchließen(String uberschrift, String meldung) {
+    protected static boolean isMenueActive() {
+        boolean MenueIsActive = start.isActive();
+        return MenueIsActive;
+    }
+
+    protected static void beiFehlerSchließen(String uberschrift, String meldung) {
         ImageIcon icon = new ImageIcon("assets/pictures/Fehler.jpg");
         JOptionPane.showMessageDialog(null, meldung, uberschrift,
                 JOptionPane.INFORMATION_MESSAGE, icon);
         System.exit(0);
     }
 
-    public static void beiFehlerFortsetzen(String uberschrift, String meldung) {
+    protected static void beiFehlerFortsetzen(String uberschrift, String meldung) {
         ImageIcon icon = new ImageIcon("assets/pictures/Fehler.jpg");
         JOptionPane.showMessageDialog(null, meldung, uberschrift,
                 JOptionPane.INFORMATION_MESSAGE, icon);
@@ -133,7 +138,7 @@ public class Main {
     static String url;
     static MP3Player mp3_player = new MP3Player();
 
-    public static void playTimer() {
+    protected static void playTimer() {
         mp3_player.stop();
         mp3_player.getPlayList().clear();
         mp3_player.addToPlayList(new File("assets/sound/timer.mp3"));
@@ -141,7 +146,7 @@ public class Main {
         mp3_player.setRepeat(true);
     }
 
-    public static void playCountdownEnd() {
+    protected static void playCountdownEnd() {
         mp3_player.stop();
         mp3_player.setRepeat(false);
         mp3_player.getPlayList().clear();
@@ -149,7 +154,7 @@ public class Main {
         mp3_player.play();
     }
 
-    public static void playGewonnen() {
+    protected static void playGewonnen() {
         mp3_player.stop();
         mp3_player.setRepeat(false);
         mp3_player.getPlayList().clear();
@@ -157,7 +162,7 @@ public class Main {
         mp3_player.play();
     }
 
-    public static void playVerloren() {
+    protected static void playVerloren() {
         mp3_player.stop();
         mp3_player.setRepeat(false);
         mp3_player.getPlayList().clear();
@@ -169,13 +174,13 @@ public class Main {
     static int Breite;
     static int Zeit;
 
-    public static void setzeEinstellungen(int height, int weight, int time) {
+    protected static void setzeEinstellungen(int height, int weight, int time) {
         Hoehe = height;
         Breite = weight;
         Zeit = time;
     }
 
-    public static int gibHoehe() {
+    protected static int gibHoehe() {
         if (Hoehe >= 0) {
             return Hoehe;
         } else {
@@ -184,7 +189,7 @@ public class Main {
         }
     }
 
-    public static int gibBreite() {
+    protected static int gibBreite() {
         if (Breite >= 0) {
             return Breite;
         } else {
@@ -193,7 +198,7 @@ public class Main {
         }
     }
 
-    public static int gibZeit() {
+    protected static int gibZeit() {
         if (Zeit >= 0) {
             return Zeit;
         } else {
