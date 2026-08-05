@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Random;
 import java.util.function.Consumer;
 
@@ -84,6 +86,16 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
         baueOberflaeche();
         pack();
         setLocationRelativeTo(null);
+
+        // Erst wenn das Fenster offen ist, kann eine Karte den Fokus annehmen.
+        // Ohne das muesste man sich vor der ersten Pfeiltaste erst per Tab in
+        // das Gitter hineinarbeiten.
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                fokussiereErsteOffeneKarte();
+            }
+        });
 
         endeMillis = System.currentTimeMillis() + einstellungen.sekunden() * 1000L;
         uhr.start();
@@ -219,6 +231,11 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
 
     @Override
     public void spielGewonnen() {
+        // Die Uhr sofort anhalten. Sonst konnte sie waehrend der Verzoegerung
+        // bis zum Dialog noch ablaufen: verloren() setzte dann beendet=true,
+        // der wartende Sieg wurde verworfen, und der Spieler bekam trotz
+        // gefundener Paare die Niederlage gemeldet.
+        uhr.stop();
         verzoegert(SIEG_DIALOG_VERZOEGERUNG_MS, this::gewonnen);
     }
 
@@ -288,6 +305,24 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
 
     private void setzeGitterAktiv(boolean aktiv) {
         gitter.setVisible(aktiv);
+        if (aktiv) {
+            // Waehrend der Pause ist das Gitter unsichtbar und verliert damit
+            // den Tastaturfokus. Ohne diese Zeile waeren die Pfeiltasten nach
+            // dem Fortsetzen wirkungslos.
+            fokussiereErsteOffeneKarte();
+        }
+    }
+
+    /** Setzt den Tastaturfokus auf die erste noch nicht gefundene Karte. */
+    private void fokussiereErsteOffeneKarte() {
+        for (int y = 0; y < einstellungen.hoehe(); y++) {
+            for (int x = 0; x < einstellungen.breite(); x++) {
+                if (knoepfe[x][y].isEnabled()) {
+                    knoepfe[x][y].requestFocusInWindow();
+                    return;
+                }
+            }
+        }
     }
 
     // ------------------------------------------------------------------

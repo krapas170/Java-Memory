@@ -23,13 +23,16 @@ public record Einstellungen(int breite, int hoehe, int sekunden) {
         if (sekunden < 1) {
             throw new IllegalArgumentException("Die Zeit muss mindestens 1 Sekunde sein, war: " + sekunden);
         }
-        if ((breite * hoehe) % 2 != 0) {
+        // Als long rechnen: 65536 x 65536 waere als int genau 0 und kaeme
+        // sonst durch beide folgenden Pruefungen.
+        long felder = (long) breite * hoehe;
+        if (felder % 2 != 0) {
             throw new IllegalArgumentException(
                     "Hoehe mal Breite muss gerade sein, sonst geht ein Paar nicht auf: " + breite + "x" + hoehe);
         }
-        if (breite * hoehe > MAX_FELDER) {
+        if (felder > MAX_FELDER) {
             throw new IllegalArgumentException(
-                    "Es sind hoechstens " + MAX_FELDER + " Felder moeglich, gefordert waren: " + (breite * hoehe));
+                    "Es sind hoechstens " + MAX_FELDER + " Felder moeglich, gefordert waren: " + felder);
         }
     }
 
@@ -43,7 +46,11 @@ public record Einstellungen(int breite, int hoehe, int sekunden) {
         if (minuten < 1) {
             throw new IllegalArgumentException("Die Zeit muss mindestens 1 Minute sein, war: " + minuten);
         }
-        return new Einstellungen(breite, hoehe, minuten * 60);
+        long sekunden = (long) minuten * 60;
+        if (sekunden > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("Die Zeit ist zu gross: " + minuten + " Minuten");
+        }
+        return new Einstellungen(breite, hoehe, (int) sekunden);
     }
 
     public int felder() {

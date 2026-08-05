@@ -17,6 +17,9 @@ Den Installer bzw. das JAR gibt es unter
 kostenloses JRE bei [Adoptium](https://adoptium.net/de/temurin/releases/?version=17).
 Ob Java schon installiert ist, verrät `java -version` in der Eingabeaufforderung.
 
+Die CI baut, testet und startet das Spiel bei jedem Push gegen **JDK 17, 21 und
+25** – die neueren LTS-Stände laufen also nachweislich mit.
+
 Das JAR startet per Doppelklick oder über:
 
 ```

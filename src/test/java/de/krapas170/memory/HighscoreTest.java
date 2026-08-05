@@ -28,8 +28,12 @@ class HighscoreTest {
 
     @AfterEach
     void raeumeAuf() throws Exception {
+        // Der Elternknoten wird geleert, nicht der entfernte selbst: Nach
+        // removeNode() ist der Knoten ungueltig, und persistiert werden muss
+        // ohnehin die Aenderung im Elternknoten.
+        Preferences eltern = knoten.parent();
         knoten.removeNode();
-        knoten.flush();
+        eltern.flush();
     }
 
     @Test

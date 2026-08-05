@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 
 /**
  * Der Startbildschirm: Feldgroesse und Zeitlimit einstellen.
@@ -110,7 +111,12 @@ public class Menue extends JFrame {
 
     private JComponent baueFuss() {
         hinweis.setForeground(new Color(0xC6, 0x28, 0x28));
-        hinweis.setPreferredSize(new Dimension(360, 20));
+        // Platz fuer zwei Zeilen: Bei 360x20 wurde die laengere der beiden
+        // Meldungen abgeschnitten - ausgerechnet die, die erklaert, warum es
+        // nicht weitergeht. Die feste Groesse verhindert, dass das Fenster
+        // springt, sobald die Meldung erscheint oder verschwindet.
+        hinweis.setPreferredSize(new Dimension(470, 38));
+        hinweis.setVerticalAlignment(SwingConstants.TOP);
 
         JButton starten = new JButton("Spiel starten!");
         starten.addActionListener(e -> starteSpiel());
@@ -143,12 +149,13 @@ public class Menue extends JFrame {
         int minuten = (Integer) zeitWahl.getValue();
 
         if ((breite * hoehe) % 2 != 0) {
-            hinweis.setText("Hoehe mal Breite muss gerade sein - bitte eine der beiden Zahlen aendern.");
+            hinweis.setText("<html>Hoehe mal Breite muss eine gerade Zahl ergeben,<br>"
+                    + "damit jede Karte einen Partner hat. Bitte eine der beiden Zahlen aendern.</html>");
             return;
         }
         if (breite * hoehe > Einstellungen.MAX_FELDER) {
-            hinweis.setText("Das waeren " + (breite * hoehe) + " Felder. Erlaubt sind hoechstens "
-                    + Einstellungen.MAX_FELDER + ".");
+            hinweis.setText("<html>Das waeren " + (breite * hoehe) + " Felder.<br>"
+                    + "Erlaubt sind hoechstens " + Einstellungen.MAX_FELDER + ".</html>");
             return;
         }
 
