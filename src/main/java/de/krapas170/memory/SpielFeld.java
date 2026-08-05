@@ -276,11 +276,26 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
         zeitAnzeige.setForeground(warnung ? new Color(0xC6, 0x28, 0x28) : Color.BLACK);
     }
 
+    /**
+     * Zeigt beide Bestwerte getrennt an.
+     *
+     * <p>Frueher stand hier "Rekord: 66 Zuege in 02:58" &ndash; das las sich wie
+     * eine einzelne Runde, war aber die Kombination aus zwei verschiedenen. Die
+     * wenigsten Zuege und die schnellste Zeit werden unabhaengig gefuehrt.</p>
+     */
     private void aktualisiereRekord() {
         int besteZuege = highscore.wenigsteZuege(einstellungen);
-        rekordAnzeige.setText(besteZuege == 0
-                ? "Rekord: noch keiner"
-                : "Rekord: " + zuegeText(besteZuege) + " in " + ZeitFormat.formatiere(highscore.schnellsteZeit(einstellungen)));
+        int besteZeit = highscore.schnellsteZeit(einstellungen);
+        if (besteZuege == 0 && besteZeit == 0) {
+            rekordAnzeige.setText("Bestwerte: noch keine");
+            rekordAnzeige.setToolTipText(null);
+            return;
+        }
+        rekordAnzeige.setText("<html>Wenigste Züge: " + besteZuege + "<br>"
+                + "Schnellste Zeit: " + ZeitFormat.formatiere(besteZeit) + "</html>");
+        rekordAnzeige.setToolTipText(
+                "Beide Bestwerte gelten für " + einstellungen.breite() + " x " + einstellungen.hoehe()
+                        + " und können aus verschiedenen Runden stammen.");
     }
 
     private void schaltePause() {
@@ -311,6 +326,26 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
             // dem Fortsetzen wirkungslos.
             fokussiereErsteOffeneKarte();
         }
+    }
+
+    /**
+     * Benennt beim Sieg genau den Bestwert, der gefallen ist.
+     *
+     * <p>Frueher stand dort nur "ein neuer Rekord" &ndash; wer schnell, aber
+     * umstaendlich gespielt hatte, konnte daraus nicht ablesen, was er
+     * eigentlich verbessert hatte.</p>
+     */
+    private static String rekordMeldung(Highscore.Verbesserung verbessert) {
+        if (verbessert.wenigereZuege() && verbessert.schnellereZeit()) {
+            return "\n\nNeuer Bestwert bei Zügen und Zeit!";
+        }
+        if (verbessert.wenigereZuege()) {
+            return "\n\nNeuer Bestwert: so wenige Züge hast du hier noch nie gebraucht.";
+        }
+        if (verbessert.schnellereZeit()) {
+            return "\n\nNeuer Bestwert: so schnell warst du hier noch nie.";
+        }
+        return "";
     }
 
     /** "1 Zug" statt "1 Zuege". */
@@ -347,12 +382,12 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
         Klaenge.instanz().spieleGewonnen();
 
         int benoetigt = einstellungen.sekunden() - verbleibendeSekunden;
-        boolean rekord = highscore.melde(einstellungen, logik.zuege(), benoetigt);
+        Highscore.Verbesserung verbessert = highscore.melde(einstellungen, logik.zuege(), benoetigt);
 
         String text = "Du hast alle Paare gefunden!\n"
                 + "Gebraucht: " + zuegeText(logik.zuege()) + " in " + ZeitFormat.formatiere(benoetigt) + ".\n"
                 + "Übrig waren " + ZeitFormat.formatiere(verbleibendeSekunden) + "."
-                + (rekord ? "\n\nDas ist ein neuer Rekord für diese Feldgröße!" : "");
+                + rekordMeldung(verbessert);
 
         frageWieWeiter("Geschafft", text, Bilder.lade("gewonnen.gif"));
     }
