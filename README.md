@@ -6,6 +6,15 @@ Ursprünglich als Schulprojekt entstanden.
 Decke zwei Karten mit demselben Symbol auf, bevor die Zeit abläuft. Feldgröße und
 Zeitlimit stellst du vor jeder Runde selbst ein.
 
+<p align="center">
+  <img src="docs/menue.png" alt="Startbildschirm mit Feldgröße und Zeitlimit" width="440">
+</p>
+
+<p align="center">
+  <img src="docs/spielfeld.png" alt="Spielfeld mit 8x8 Karten, Uhr und Zugzähler" width="380">
+  <img src="docs/gewonnen.png" alt="Gewonnen-Dialog mit Zügen, Restzeit und Rekordmeldung" width="400">
+</p>
+
 ## Spielen
 
 ### Fertiges Spiel herunterladen

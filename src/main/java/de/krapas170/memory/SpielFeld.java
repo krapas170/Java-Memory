@@ -280,7 +280,7 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
         int besteZuege = highscore.wenigsteZuege(einstellungen);
         rekordAnzeige.setText(besteZuege == 0
                 ? "Rekord: noch keiner"
-                : "Rekord: " + besteZuege + " Züge in " + ZeitFormat.formatiere(highscore.schnellsteZeit(einstellungen)));
+                : "Rekord: " + zuegeText(besteZuege) + " in " + ZeitFormat.formatiere(highscore.schnellsteZeit(einstellungen)));
     }
 
     private void schaltePause() {
@@ -313,6 +313,16 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
         }
     }
 
+    /** "1 Zug" statt "1 Zuege". */
+    private static String zuegeText(int anzahl) {
+        return anzahl + (anzahl == 1 ? " Zug" : " Züge");
+    }
+
+    /** "von 1 Paar" statt "von 1 Paaren". */
+    private static String paareDativ(int anzahl) {
+        return anzahl + (anzahl == 1 ? " Paar" : " Paaren");
+    }
+
     /** Setzt den Tastaturfokus auf die erste noch nicht gefundene Karte. */
     private void fokussiereErsteOffeneKarte() {
         for (int y = 0; y < einstellungen.hoehe(); y++) {
@@ -340,7 +350,7 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
         boolean rekord = highscore.melde(einstellungen, logik.zuege(), benoetigt);
 
         String text = "Du hast alle Paare gefunden!\n"
-                + "Gebraucht: " + logik.zuege() + " Züge in " + ZeitFormat.formatiere(benoetigt) + ".\n"
+                + "Gebraucht: " + zuegeText(logik.zuege()) + " in " + ZeitFormat.formatiere(benoetigt) + ".\n"
                 + "Übrig waren " + ZeitFormat.formatiere(verbleibendeSekunden) + "."
                 + (rekord ? "\n\nDas ist ein neuer Rekord für diese Feldgröße!" : "");
 
@@ -355,7 +365,7 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
         Klaenge.instanz().spieleVerloren();
 
         String text = "Die Zeit ist um und du hast es leider nicht geschafft.\n"
-                + "Gefunden: " + logik.gefundenePaare() + " von " + einstellungen.paare() + " Paaren.";
+                + "Gefunden: " + logik.gefundenePaare() + " von " + paareDativ(einstellungen.paare()) + ".";
 
         frageWieWeiter("Zeit um", text, Bilder.lade("verloren.gif"));
     }
