@@ -77,12 +77,12 @@ public final class Main {
     }
 
     private static void zeigeUpdateHinweis(String serverVersion) {
-        String[] optionen = {"Zur Download-Seite", "Spaeter"};
+        String[] optionen = {"Zur Download-Seite", "Später"};
         int antwort = Dialoge.frage(
                 null,
-                "Neue Version verfuegbar",
+                "Neue Version verfügbar",
                 "Es gibt eine neuere Fassung des Spiels.\n"
-                        + "Installiert ist " + Version.lokal() + ", verfuegbar ist " + serverVersion + ".",
+                        + "Installiert ist " + Version.lokal() + ", verfügbar ist " + serverVersion + ".",
                 null,
                 optionen,
                 1);
@@ -103,7 +103,7 @@ public final class Main {
         }
         JOptionPane.showMessageDialog(
                 null,
-                "Bitte oeffne diese Seite im Browser:\n" + UpdatePruefung.RELEASE_SEITE,
+                "Bitte öffne diese Seite im Browser:\n" + UpdatePruefung.RELEASE_SEITE,
                 "Download",
                 JOptionPane.INFORMATION_MESSAGE);
     }

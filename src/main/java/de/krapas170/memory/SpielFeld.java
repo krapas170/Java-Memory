@@ -151,7 +151,7 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
 
         pauseKnopf.addActionListener(e -> schaltePause());
 
-        JButton menue = new JButton("Werte aendern");
+        JButton menue = new JButton("Werte ändern");
         menue.addActionListener(e -> zurueckZumMenue());
 
         JButton beenden = new JButton("Beenden");
@@ -226,7 +226,7 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
 
     @Override
     public void zeigeZuege(int zuege) {
-        zugAnzeige.setText("Zuege: " + zuege);
+        zugAnzeige.setText("Züge: " + zuege);
     }
 
     @Override
@@ -280,7 +280,7 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
         int besteZuege = highscore.wenigsteZuege(einstellungen);
         rekordAnzeige.setText(besteZuege == 0
                 ? "Rekord: noch keiner"
-                : "Rekord: " + besteZuege + " Zuege in " + ZeitFormat.formatiere(highscore.schnellsteZeit(einstellungen)));
+                : "Rekord: " + besteZuege + " Züge in " + ZeitFormat.formatiere(highscore.schnellsteZeit(einstellungen)));
     }
 
     private void schaltePause() {
@@ -340,9 +340,9 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
         boolean rekord = highscore.melde(einstellungen, logik.zuege(), benoetigt);
 
         String text = "Du hast alle Paare gefunden!\n"
-                + "Gebraucht: " + logik.zuege() + " Zuege in " + ZeitFormat.formatiere(benoetigt) + ".\n"
-                + "Uebrig waren " + ZeitFormat.formatiere(verbleibendeSekunden) + "."
-                + (rekord ? "\n\nDas ist ein neuer Rekord fuer diese Feldgroesse!" : "");
+                + "Gebraucht: " + logik.zuege() + " Züge in " + ZeitFormat.formatiere(benoetigt) + ".\n"
+                + "Übrig waren " + ZeitFormat.formatiere(verbleibendeSekunden) + "."
+                + (rekord ? "\n\nDas ist ein neuer Rekord für diese Feldgröße!" : "");
 
         frageWieWeiter("Geschafft", text, Bilder.lade("gewonnen.gif"));
     }
@@ -367,7 +367,7 @@ public class SpielFeld extends JFrame implements SpielAnzeige {
     }
 
     private void frageWieWeiter(String titel, String text, javax.swing.Icon bild) {
-        String[] optionen = {"Nochmal", "Werte aendern", "Beenden"};
+        String[] optionen = {"Nochmal", "Werte ändern", "Beenden"};
         // Wird der Dialog weggeklickt, geht es zurueck ins Menue. Das ist die
         // einzige Antwort, die weder Daten verwirft noch das Programm beendet.
         int antwort = Dialoge.frage(this, titel, text, bild, optionen, 1);

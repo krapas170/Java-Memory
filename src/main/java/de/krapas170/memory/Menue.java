@@ -72,9 +72,9 @@ public class Menue extends JFrame {
         JLabel titel = new JLabel("Herzlich willkommen beim Memory-Spiel");
         titel.setFont(titel.getFont().deriveFont(Font.BOLD, 20f));
 
-        JLabel erklaerung = new JLabel("<html>Stelle die Groesse des Spielfelds und das Zeitlimit ein.<br>"
-                + "Hoehe mal Breite muss eine gerade Zahl ergeben, damit jede Karte<br>"
-                + "einen Partner hat. Moeglich sind hoechstens " + Einstellungen.MAX_FELDER + " Felder.</html>");
+        JLabel erklaerung = new JLabel("<html>Stelle die Größe des Spielfelds und das Zeitlimit ein.<br>"
+                + "Höhe mal Breite muss eine gerade Zahl ergeben, damit jede Karte<br>"
+                + "einen Partner hat. Möglich sind höchstens " + Einstellungen.MAX_FELDER + " Felder.</html>");
 
         Box kopf = Box.createVerticalBox();
         titel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -87,12 +87,12 @@ public class Menue extends JFrame {
 
     private JComponent baueFormular() {
         JPanel formular = new JPanel(new GridLayout(3, 2, 12, 8));
-        formular.add(new JLabel("Hoehe:"));
-        formular.add(hoeheWahl);
+        formular.add(new JLabel("Höhe:"));
+        formular.add(linksbuendig(hoeheWahl));
         formular.add(new JLabel("Breite:"));
-        formular.add(breiteWahl);
+        formular.add(linksbuendig(breiteWahl));
         formular.add(new JLabel("Zeitlimit in Minuten:"));
-        formular.add(zeitWahl);
+        formular.add(linksbuendig(zeitWahl));
 
         JPanel vorlagen = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
         vorlagen.add(new JLabel("Vorlagen:"));
@@ -149,13 +149,13 @@ public class Menue extends JFrame {
         int minuten = (Integer) zeitWahl.getValue();
 
         if ((breite * hoehe) % 2 != 0) {
-            hinweis.setText("<html>Hoehe mal Breite muss eine gerade Zahl ergeben,<br>"
-                    + "damit jede Karte einen Partner hat. Bitte eine der beiden Zahlen aendern.</html>");
+            hinweis.setText("<html>Höhe mal Breite muss eine gerade Zahl ergeben,<br>"
+                    + "damit jede Karte einen Partner hat. Bitte eine der beiden Zahlen ändern.</html>");
             return;
         }
         if (breite * hoehe > Einstellungen.MAX_FELDER) {
-            hinweis.setText("<html>Das waeren " + (breite * hoehe) + " Felder.<br>"
-                    + "Erlaubt sind hoechstens " + Einstellungen.MAX_FELDER + ".</html>");
+            hinweis.setText("<html>Das wären " + (breite * hoehe) + " Felder.<br>"
+                    + "Erlaubt sind höchstens " + Einstellungen.MAX_FELDER + ".</html>");
             return;
         }
 
@@ -165,10 +165,21 @@ public class Menue extends JFrame {
         beimStart.accept(einstellungen);
     }
 
-    private static JSpinner neuerSpinner(int wert, int min, int max) {
+    /** Haelt den Spinner auf seiner Wunschbreite, statt ihn die Spalte fuellen zu lassen. */
+    private static JComponent linksbuendig(JComponent bauteil) {
+        JPanel huelle = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        huelle.add(bauteil);
+        return huelle;
+    }
+
+    private JSpinner neuerSpinner(int wert, int min, int max) {
         JSpinner spinner = new JSpinner(new SpinnerNumberModel(Math.min(Math.max(wert, min), max), min, max, 1));
         JSpinner.NumberEditor editor = new JSpinner.NumberEditor(spinner, "0");
-        editor.getTextField().setColumns(4);
+        editor.getTextField().setColumns(3);
+        // Enter im Zahlenfeld loest sonst nur die Uebernahme des Werts aus und
+        // erreicht den Standardknopf nie - fuer den Spieler passiert dann
+        // scheinbar gar nichts.
+        editor.getTextField().addActionListener(e -> starteSpiel());
         spinner.setEditor(editor);
         return spinner;
     }
