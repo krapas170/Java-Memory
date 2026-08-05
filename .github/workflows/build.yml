@@ -12,28 +12,55 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # 17 ist die Mindestversion, 21 und 25 sind die neueren LTS-Staende.
+        java: ['17', '21', '25']
+
+    name: JDK ${{ matrix.java }}
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: JDK 17 einrichten
+      - name: JDK ${{ matrix.java }} einrichten
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: ${{ matrix.java }}
           cache: maven
 
       - name: Bauen und testen
         run: mvn -B --no-transfer-progress verify
 
+      # Startet das fertige JAR in einem virtuellen Bildschirm und schaut nach,
+      # ob die Swing-Oberflaeche ohne Ausnahme hochkommt. Das Zeitlimit beendet
+      # das Spiel danach; abgebrochen zu werden ist der Erfolgsfall.
+      - name: Oberflaeche im virtuellen Bildschirm starten
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb
+          xvfb-run -a timeout 25s java -jar target/java-memory.jar > start.log 2>&1 || true
+          echo "----- Ausgabe des Spiels -----"
+          cat start.log
+          echo "------------------------------"
+          if grep -qE "Exception|^\s+at |Error:" start.log; then
+            echo "Beim Start ist etwas schiefgegangen."
+            exit 1
+          fi
+          echo "Die Oberflaeche ist ohne Ausnahme gestartet."
+
       - name: Testberichte hochladen
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: surefire-reports
+          name: surefire-reports-jdk${{ matrix.java }}
           path: target/surefire-reports/
           if-no-files-found: ignore
 
       - name: Spiel-JAR hochladen
+        if: matrix.java == '17'
         uses: actions/upload-artifact@v4
         with:
           name: java-memory-jar
