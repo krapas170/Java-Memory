@@ -31,7 +31,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20240303</version>
+            <version>20260719</version>
         </dependency>
 
         <!-- MP3-Wiedergabe direkt aus einem InputStream, damit die Klaenge im JAR liegen koennen. -->
