@@ -1,8 +1,15 @@
+# Maven
+/target/
+
+# IDE
 Java-Memory.iml
+/.idea/
+/.vscode/
+/nbproject/
+
+# Alte Ablagen
 Java-Memory.jar
 version-server.json
 /lib/
 /InstallerScript/
-/.idea/
 /versions/
-/.vscode/
