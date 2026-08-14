@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -36,10 +37,32 @@ public final class UpdatePruefung {
         verbindung.setReadTimeout(TIMEOUT_MS);
         verbindung.setRequestProperty("Accept", "application/json");
         try (InputStream eingang = verbindung.getInputStream()) {
-            String inhalt = new String(eingang.readAllBytes(), StandardCharsets.UTF_8);
-            return new JSONObject(inhalt).getString("version");
+            return leseVersionAus(new String(eingang.readAllBytes(), StandardCharsets.UTF_8));
         } finally {
             verbindung.disconnect();
+        }
+    }
+
+    /**
+     * Zieht die Versionsnummer aus dem Inhalt von {@code version.json}.
+     *
+     * <p>Bewusst vom Netzwerkzugriff getrennt: So laesst sich das Auswerten
+     * pruefen, ohne dass ein Test online gehen muss. Das ist die einzige
+     * Stelle im Programm, die org.json benutzt &ndash; ohne diese Trennung
+     * wuerde eine neue Fassung der Bibliothek von keinem Test beruehrt.</p>
+     *
+     * @throws IOException wenn der Inhalt kein brauchbares JSON ist oder das
+     *                     Feld {@code version} fehlt
+     */
+    static String leseVersionAus(String inhalt) throws IOException {
+        try {
+            String version = new JSONObject(inhalt).getString("version").trim();
+            if (version.isEmpty()) {
+                throw new IOException("Das Feld 'version' ist leer.");
+            }
+            return version;
+        } catch (JSONException e) {
+            throw new IOException("version.json ist nicht auswertbar: " + e.getMessage(), e);
         }
     }
 
