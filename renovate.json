@@ -2,5 +2,18 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
-  ]
+  ],
+  "description": "Renovate ist hier das einzige Update-Werkzeug (Vorgabe Pascal 24.11.2026: überall Renovate, kein Dependabot-Versionsbot). Sicherheits-Scan: OSV prüft alle Abhängigkeiten auch ohne Dependabot-Alerts; Sicherheits-PRs sofort, keine Gruppierung, keine PR-Limits.",
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "schedule": [
+      "at any time"
+    ],
+    "labels": [
+      "security"
+    ]
+  },
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0
 }
